@@ -1,0 +1,5 @@
+name: LagrangeMCPlugin
+version: '${project.version}'
+main: io.gitee.soulgoodmans.lagrangemcplugin.LagrangeMCPlugin
+api-version: 1.20
+authors: [ busilaoni ]
