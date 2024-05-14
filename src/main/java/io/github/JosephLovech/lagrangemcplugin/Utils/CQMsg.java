@@ -8,9 +8,9 @@ import java.util.ArrayList;
 public class CQMsg extends ArrayList {
 
     /**
-     * 纯文本内容
-     * param text
-     * return
+     * @纯文本内容
+     * @param text
+     * @return
      */
     public CQMsg Text(String text){
         this.add(escape(text));
@@ -98,7 +98,7 @@ public class CQMsg extends ArrayList {
 
     /**
      * 转换文本中的 CQ 码为可直接发送给 QQ 服务器的格式
-     * return
+     * @return
      */
     private String escape(String str){
         return str.replace("&", "&amp;")

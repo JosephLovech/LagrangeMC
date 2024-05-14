@@ -11,7 +11,7 @@
 
     <name>LagrangeMCPlugin</name>
 
-    <url>https://github.com/JosephLovech/LagrangeMC</url>
+    <url>https://gitee.com/busilaoni/LagrangeMC</url>
 
     <licenses>
         <license>
@@ -21,9 +21,9 @@
     </licenses>
 
     <scm>
-        <connection>https://github.com/JosephLovech/LagrangeMC.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com:JosephLovech/LagrangeMC.git</developerConnection>
-        <url>https://github.com/JosephLovech/LagrangeMC</url>
+        <connection>https://gitee.com/busilaoni/LagrangeMC.git</connection>
+        <developerConnection>scm:git:ssh://git@gitee.com:busilaoni/LagrangeMC.git</developerConnection>
+        <url>https://gitee.com/busilaoni/LagrangeMC</url>
     </scm>
 
     <developers>
