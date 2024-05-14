@@ -18,7 +18,7 @@ public class SocketServer extends WebSocketServer {
 
     /**
      * 端口号
-     * @param port
+     * param port
      */
     public SocketServer(Integer port) {
         super(new InetSocketAddress(port));
@@ -26,8 +26,8 @@ public class SocketServer extends WebSocketServer {
 
     /**
      * 开启连接
-     * @param conn
-     * @param handshake
+     * param conn
+     * param handshake
      */
     @Override
     public void onOpen(WebSocket conn, ClientHandshake handshake) {
@@ -36,10 +36,10 @@ public class SocketServer extends WebSocketServer {
 
     /**
      *  关闭连接
-     * @param conn
-     * @param code
-     * @param reason
-     * @param remote
+     * param conn
+     * param code
+     * param reason
+     * param remote
      */
     @Override
     public void onClose(WebSocket conn, int code, String reason, boolean remote) {
@@ -48,8 +48,8 @@ public class SocketServer extends WebSocketServer {
 
     /**
      * 接受客户端消息
-     * @param conn
-     * @param message
+     * param conn
+     * param message
      */
     @Override
     public void onMessage(WebSocket conn, String message) {
@@ -100,7 +100,7 @@ public class SocketServer extends WebSocketServer {
 
     /**
      * 处理接受到的消息
-     * @param jsonObject
+     * param jsonObject
      */
     private void handleMessage(JSONObject jsonObject){
 
@@ -145,7 +145,7 @@ public class SocketServer extends WebSocketServer {
      * 处理插件消息。
      *
      * 处理方法，接受一个 BotPlugin 参数，并返回一个整数结果
-     * @param action
+     * param action
      */
     private void handlePluginMessages(Function<BotPlugin, Integer> action) {
 
@@ -165,12 +165,9 @@ public class SocketServer extends WebSocketServer {
     /**
      * 获取指定类型的插件实例。
      *
-     * 插件类型
-     * @param clazz
-     * 插件类型参数
-     * @param <T>
-     * 插件实例，如果不存在，则返回 null
-     * @return
+     * param clazz 插件类型
+     * param <T> 插件类型参数
+     * return 插件实例，如果不存在，则返回 null
      */
     private <T> T getPlugin(Class<T> clazz) {
         try {
@@ -184,8 +181,8 @@ public class SocketServer extends WebSocketServer {
 
     /**
      * 错误信息
-     * @param conn
-     * @param ex
+     * param conn
+     * param ex
      */
     @Override
     public void onError(WebSocket conn, Exception ex) {

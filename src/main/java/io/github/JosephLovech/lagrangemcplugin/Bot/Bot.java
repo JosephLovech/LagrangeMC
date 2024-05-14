@@ -21,12 +21,9 @@ public class Bot {
     /**
      * 发送私聊消息
      *
-     * QQ号
-     * @param userId
-     * 信息
-     * @param message
-     * 消息内容是否作为纯文本发送
-     * @param escape
+     * param userId QQ号
+     * param message 信息
+     * param escape 消息内容是否作为纯文本发送
      */
     public static void sendPrivateMessage(Long userId,String message, boolean escape){
         Map map = new HashMap();
@@ -38,12 +35,10 @@ public class Bot {
 
     /**
      * 发送群消息
-     * 群号
-     * @param groupId
-     * 信息
-     * @param message
-     * 消息内容是否作为纯文本发送
-     * @param escape
+     *
+     * param groupId 群号
+     * param message 信息
+     * param escape 消息内容是否作为纯文本发送
      */
     public static void sendGroupMessage(Long groupId,String message, boolean escape){
         Map map = new HashMap();
@@ -55,9 +50,9 @@ public class Bot {
 
     /**
      * 封装信息
-     * @param api
-     * @param params
-     * @return
+     * param api
+     * param params
+     * return
      */
     private static ApiResult getApiResult(Api api, Map params){
         ApiResult result = new ApiResult();

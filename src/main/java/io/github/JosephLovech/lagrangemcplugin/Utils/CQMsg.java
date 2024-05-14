@@ -9,8 +9,8 @@ public class CQMsg extends ArrayList {
 
     /**
      * 纯文本内容
-     * @param text
-     * @return
+     * param text
+     * return
      */
     public CQMsg Text(String text){
         this.add(escape(text));
@@ -21,8 +21,8 @@ public class CQMsg extends ArrayList {
      * QQ表情
      *
      * QQ表情Id
-     * @param id
-     * @return
+     * param id
+     * return
      */
     public CQMsg QQFace(Integer id){
         this.add(String.format("[CQ:face,id=%d]",id));
@@ -33,8 +33,8 @@ public class CQMsg extends ArrayList {
      * 图片
      *
      * 图片链接
-     * @param url
-     * @return
+     * param url
+     * return
      */
     public CQMsg Image(String url){
         this.add(String.format("[CQ:image,file=%s]",escape(url)));
@@ -42,11 +42,11 @@ public class CQMsg extends ArrayList {
     }
 
     /**
-     * @某人
+     * .@某人
      *
      * QQ号
-     * @param userId
-     * @return
+     * param userId
+     * return
      */
     public CQMsg AtOne(Long userId){
         this.add(String.format("[CQ:at,qq=%d]",userId));
@@ -54,8 +54,8 @@ public class CQMsg extends ArrayList {
     }
 
     /**
-     * @全图成员
-     * @return
+     * .@全体成员
+     * return
      */
     public CQMsg AtAll(){
         this.add("[CQ:at,qq=all]");
@@ -64,7 +64,7 @@ public class CQMsg extends ArrayList {
 
     /**
      * 转换文本中的 CQ 码为可直接发送给 QQ 服务器的格式
-     * @return
+     * return
      */
     private String escape(String str){
         return str.replace("&", "&amp;")

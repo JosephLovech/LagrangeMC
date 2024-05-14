@@ -20,8 +20,8 @@ public enum Api {
 
     /**
      * 构建api枚举类
-     * @param action
-     * @param description
+     * param action
+     * param description
      */
     Api(String action, String description) {
         this.action = action;
@@ -30,7 +30,7 @@ public enum Api {
 
     /**
      * 获取发送参数 action
-     * @return
+     * return
      */
     public String getAction() {
         return action;
@@ -38,7 +38,7 @@ public enum Api {
 
     /**
      * 获取描述 description
-     * @return
+     * return
      */
     public String getDescription() {
         return description;
