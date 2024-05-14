@@ -1,4 +1,4 @@
-package io.gitee.busilaoni.lagrangemcplugin.Event;
+package io.gitee.busilaoni.lagrangemcplugin.Entity;
 
 import com.alibaba.fastjson2.annotation.JSONField;
 import lombok.Data;

@@ -60,6 +60,7 @@ public class SocketServer extends WebSocketServer {
         //获取postType类型
         String postType = jsonObject.getString("post_type");
 
+        //没有postType参数时为响应数据
         if (postType == null){
             return;
         }

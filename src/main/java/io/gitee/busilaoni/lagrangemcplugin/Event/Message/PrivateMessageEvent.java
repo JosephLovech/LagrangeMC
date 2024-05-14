@@ -1,7 +1,7 @@
 package io.gitee.busilaoni.lagrangemcplugin.Event.Message;
 
 import com.alibaba.fastjson2.annotation.JSONField;
-import io.gitee.busilaoni.lagrangemcplugin.Event.Sender;
+import io.gitee.busilaoni.lagrangemcplugin.Entity.Sender;
 import lombok.Data;
 
 /**

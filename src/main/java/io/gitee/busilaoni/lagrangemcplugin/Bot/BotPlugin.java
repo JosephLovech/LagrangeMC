@@ -24,7 +24,7 @@ public abstract class BotPlugin {
      * `MatchedAndBlock`表示处理完毕不继续下一个插件处理,
      * `NotMatch`表示未处理并继续下一个插件处理
      */
-    public int onPrivateMessage( PrivateMessageEvent event) {
+    public int onPrivateMessage(PrivateMessageEvent event) {
         return NotMatch;
     }
 
@@ -36,7 +36,7 @@ public abstract class BotPlugin {
      * `MatchedAndBlock`表示处理完毕不继续下一个插件处理,
      * `NotMatch`表示未处理并继续下一个插件处理
      */
-    public int onGroupMessage( GroupMessageEvent event) {
+    public int onGroupMessage(GroupMessageEvent event) {
         return NotMatch;
     }
 
