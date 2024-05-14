@@ -1,4 +1,4 @@
-package io.github.JosephLovech.lagrangemcplugin;
+package io.gitee.busilaoni.lagrangemcplugin;
 
 import lombok.Data;
 import nl.vv32.rcon.Rcon;

@@ -1,7 +1,7 @@
-package io.github.JosephLovech.lagrangemcplugin.Event.Message;
+package io.gitee.busilaoni.lagrangemcplugin.Event.Message;
 
 import com.alibaba.fastjson2.annotation.JSONField;
-import io.github.JosephLovech.lagrangemcplugin.Event.Sender;
+import io.gitee.busilaoni.lagrangemcplugin.Event.Sender;
 import lombok.Data;
 
 /**

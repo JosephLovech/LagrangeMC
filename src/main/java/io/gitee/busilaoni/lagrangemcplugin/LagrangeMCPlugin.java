@@ -1,4 +1,4 @@
-package io.github.JosephLovech.lagrangemcplugin;
+package io.gitee.busilaoni.lagrangemcplugin;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
