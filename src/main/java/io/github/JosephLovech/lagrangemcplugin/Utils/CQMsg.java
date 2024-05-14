@@ -19,10 +19,8 @@ public class CQMsg extends ArrayList {
 
     /**
      * QQ表情
-     *
-     * QQ表情Id
-     * param id
-     * return
+     * @param id QQ表情Id
+     * @return
      */
     public CQMsg QQFace(Integer id){
         this.add(String.format("[CQ:face,id=%d]",id));
@@ -31,13 +29,49 @@ public class CQMsg extends ArrayList {
 
     /**
      * 图片
-     *
-     * 图片链接
-     * param url
-     * return
+     * @param file 图片文件名
+     * @return
      */
-    public CQMsg Image(String url){
-        this.add(String.format("[CQ:image,file=%s]",escape(url)));
+    public CQMsg Image(String file){
+        this.add(String.format("[CQ:image,file=%s]",escape(file)));
+        return this;
+    }
+
+    /**
+     * 图片
+     * @param file 图片文件名
+     * @param type 图片类型，flash 表示闪照，无此参数表示普通图片
+     * @param cache 只在通过网络 URL 发送时有效，表示是否使用已缓存的文件，默认 1
+     * @param proxy 只在通过网络 URL 发送时有效，表示是否通过代理下载文件（需通过环境变量或配置文件配置代理），默认 1
+     * @param timeout 只在通过网络 URL 发送时有效，单位秒，表示下载网络文件的超时时间，默认不超时
+     * @return
+     */
+    public CQMsg Image(String file, String type, Integer cache, Integer proxy, Integer timeout){
+        this.add(String.format("[CQ:image,file=%s,type=%s,cache=%d,proxy=%d,timeout=%d]",escape(file),type,cache,proxy,timeout));
+        return this;
+    }
+
+    /**
+     * 语音
+     * @param file 语音文件名
+     * @return
+     */
+    public CQMsg Record(String file){
+        this.add(String.format("[CQ:record,file=%s]",escape(file)));
+        return this;
+    }
+
+    /**
+     * 语音
+     * @param file 语音文件名
+     * @param magic 发送时可选，默认 0，设置为 1 表示变声
+     * @param cache 只在通过网络 URL 发送时有效，表示是否使用已缓存的文件，默认 1
+     * @param proxy 只在通过网络 URL 发送时有效，表示是否通过代理下载文件（需通过环境变量或配置文件配置代理），默认 1
+     * @param timeout 只在通过网络 URL 发送时有效，单位秒，表示下载网络文件的超时时间 ，默认不超时
+     * @return
+     */
+    public CQMsg Record(String file, Integer magic, Integer cache, Integer proxy, Integer timeout){
+        this.add(String.format("[CQ:record,file=%s,magic=%d,cache=%d,proxy=%d,timeout=%d]",escape(file),magic,cache,proxy,timeout));
         return this;
     }
 
