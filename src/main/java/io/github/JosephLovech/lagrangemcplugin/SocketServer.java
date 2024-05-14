@@ -143,7 +143,6 @@ public class SocketServer extends WebSocketServer {
 
     /**
      * 处理插件消息。
-     *
      * 处理方法，接受一个 BotPlugin 参数，并返回一个整数结果
      * param action
      */
@@ -164,7 +163,6 @@ public class SocketServer extends WebSocketServer {
 
     /**
      * 获取指定类型的插件实例。
-     *
      * param clazz 插件类型
      * param <T> 插件类型参数
      * return 插件实例，如果不存在，则返回 null

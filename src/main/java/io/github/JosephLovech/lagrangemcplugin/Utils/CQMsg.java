@@ -8,9 +8,9 @@ import java.util.ArrayList;
 public class CQMsg extends ArrayList {
 
     /**
-     * @纯文本内容
-     * @param text
-     * @return
+     * 纯文本内容
+     * param text
+     * return
      */
     public CQMsg Text(String text){
         this.add(escape(text));
@@ -19,8 +19,8 @@ public class CQMsg extends ArrayList {
 
     /**
      * QQ表情
-     * @param id QQ表情Id
-     * @return
+     * param id QQ表情Id
+     * return
      */
     public CQMsg QQFace(Integer id){
         this.add(String.format("[CQ:face,id=%d]",id));
@@ -29,8 +29,8 @@ public class CQMsg extends ArrayList {
 
     /**
      * 图片
-     * @param file 图片文件名
-     * @return
+     * param file 图片文件名
+     * return
      */
     public CQMsg Image(String file){
         this.add(String.format("[CQ:image,file=%s]",escape(file)));
@@ -39,12 +39,12 @@ public class CQMsg extends ArrayList {
 
     /**
      * 图片
-     * @param file 图片文件名
-     * @param type 图片类型，flash 表示闪照，无此参数表示普通图片
-     * @param cache 只在通过网络 URL 发送时有效，表示是否使用已缓存的文件，默认 1
-     * @param proxy 只在通过网络 URL 发送时有效，表示是否通过代理下载文件（需通过环境变量或配置文件配置代理），默认 1
-     * @param timeout 只在通过网络 URL 发送时有效，单位秒，表示下载网络文件的超时时间，默认不超时
-     * @return
+     * param file 图片文件名
+     * param type 图片类型，flash 表示闪照，无此参数表示普通图片
+     * param cache 只在通过网络 URL 发送时有效，表示是否使用已缓存的文件，默认 1
+     * param proxy 只在通过网络 URL 发送时有效，表示是否通过代理下载文件（需通过环境变量或配置文件配置代理），默认 1
+     * param timeout 只在通过网络 URL 发送时有效，单位秒，表示下载网络文件的超时时间，默认不超时
+     * return
      */
     public CQMsg Image(String file, String type, Integer cache, Integer proxy, Integer timeout){
         this.add(String.format("[CQ:image,file=%s,type=%s,cache=%d,proxy=%d,timeout=%d]",escape(file),type,cache,proxy,timeout));
@@ -53,8 +53,8 @@ public class CQMsg extends ArrayList {
 
     /**
      * 语音
-     * @param file 语音文件名
-     * @return
+     * param file 语音文件名
+     * return
      */
     public CQMsg Record(String file){
         this.add(String.format("[CQ:record,file=%s]",escape(file)));
@@ -63,12 +63,12 @@ public class CQMsg extends ArrayList {
 
     /**
      * 语音
-     * @param file 语音文件名
-     * @param magic 发送时可选，默认 0，设置为 1 表示变声
-     * @param cache 只在通过网络 URL 发送时有效，表示是否使用已缓存的文件，默认 1
-     * @param proxy 只在通过网络 URL 发送时有效，表示是否通过代理下载文件（需通过环境变量或配置文件配置代理），默认 1
-     * @param timeout 只在通过网络 URL 发送时有效，单位秒，表示下载网络文件的超时时间 ，默认不超时
-     * @return
+     * param file 语音文件名
+     * param magic 发送时可选，默认 0，设置为 1 表示变声
+     * param cache 只在通过网络 URL 发送时有效，表示是否使用已缓存的文件，默认 1
+     * param proxy 只在通过网络 URL 发送时有效，表示是否通过代理下载文件（需通过环境变量或配置文件配置代理），默认 1
+     * param timeout 只在通过网络 URL 发送时有效，单位秒，表示下载网络文件的超时时间 ，默认不超时
+     * return
      */
     public CQMsg Record(String file, Integer magic, Integer cache, Integer proxy, Integer timeout){
         this.add(String.format("[CQ:record,file=%s,magic=%d,cache=%d,proxy=%d,timeout=%d]",escape(file),magic,cache,proxy,timeout));
@@ -77,9 +77,7 @@ public class CQMsg extends ArrayList {
 
     /**
      * .@某人
-     *
-     * QQ号
-     * param userId
+     * param userId QQ号
      * return
      */
     public CQMsg AtOne(Long userId){
@@ -98,7 +96,7 @@ public class CQMsg extends ArrayList {
 
     /**
      * 转换文本中的 CQ 码为可直接发送给 QQ 服务器的格式
-     * @return
+     * return
      */
     private String escape(String str){
         return str.replace("&", "&amp;")
