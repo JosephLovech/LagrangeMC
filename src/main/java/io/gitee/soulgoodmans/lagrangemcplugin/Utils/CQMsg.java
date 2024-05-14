@@ -19,7 +19,9 @@ public class CQMsg extends ArrayList {
 
     /**
      * QQ表情
-     * @param id QQ表情Id
+     *
+     * QQ表情Id
+     * @param id
      * @return
      */
     public CQMsg QQFace(Integer id){
@@ -29,7 +31,9 @@ public class CQMsg extends ArrayList {
 
     /**
      * 图片
-     * @param url 图片链接
+     *
+     * 图片链接
+     * @param url
      * @return
      */
     public CQMsg Image(String url){
@@ -39,6 +43,8 @@ public class CQMsg extends ArrayList {
 
     /**
      * @某人
+     *
+     * QQ号
      * @param userId
      * @return
      */

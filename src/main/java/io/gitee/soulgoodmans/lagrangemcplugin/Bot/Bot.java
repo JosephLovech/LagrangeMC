@@ -20,9 +20,13 @@ public class Bot {
 
     /**
      * 发送私聊消息
-     * @param userId 好友号
-     * @param message 信息
-     * @param escape 消息内容是否作为纯文本发送
+     *
+     * QQ号
+     * @param userId
+     * 信息
+     * @param message
+     * 消息内容是否作为纯文本发送
+     * @param escape
      */
     public static void sendPrivateMessage(Long userId,String message, boolean escape){
         Map map = new HashMap();
@@ -34,9 +38,12 @@ public class Bot {
 
     /**
      * 发送群消息
-     * @param groupId 群号
-     * @param message 信息
-     * @param escape 消息内容是否作为纯文本发送
+     * 群号
+     * @param groupId
+     * 信息
+     * @param message
+     * 消息内容是否作为纯文本发送
+     * @param escape
      */
     public static void sendGroupMessage(Long groupId,String message, boolean escape){
         Map map = new HashMap();

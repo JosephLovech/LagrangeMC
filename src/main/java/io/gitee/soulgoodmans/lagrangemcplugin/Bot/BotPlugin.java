@@ -20,8 +20,10 @@ public abstract class BotPlugin {
     /**
      * 收到私聊消息时调用此方法
      *
-     * @param event 事件内容
-     * @return 消息是否处理完毕,
+     * 事件内容
+     * @param event
+     * @return
+     * 消息是否处理完毕,
      * `MatchedAndBlock`表示处理完毕不继续下一个插件处理,
      * `NotMatch`表示未处理并继续下一个插件处理
      */
@@ -33,8 +35,10 @@ public abstract class BotPlugin {
     /**
      * 收到群消息时调用此方法
      *
-     * @param event 事件内容
-     * @return 消息是否处理完毕,
+     * 事件内容
+     * @param event
+     * @return
+     * 消息是否处理完毕,
      * `MatchedAndBlock`表示处理完毕不继续下一个插件处理,
      * `NotMatch`表示未处理并继续下一个插件处理
      */

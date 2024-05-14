@@ -17,7 +17,8 @@ import java.util.function.Function;
 public class SocketServer extends WebSocketServer {
 
     /**
-     * @param port 端口号
+     * 端口号
+     * @param port
      */
     public SocketServer(Integer port) {
         super(new InetSocketAddress(port));
@@ -143,7 +144,8 @@ public class SocketServer extends WebSocketServer {
     /**
      * 处理插件消息。
      *
-     * @param action 处理方法，接受一个 BotPlugin 参数，并返回一个整数结果
+     * 处理方法，接受一个 BotPlugin 参数，并返回一个整数结果
+     * @param action
      */
     private void handlePluginMessages(Function<BotPlugin, Integer> action) {
 
@@ -163,9 +165,12 @@ public class SocketServer extends WebSocketServer {
     /**
      * 获取指定类型的插件实例。
      *
-     * @param clazz 插件类型
-     * @param <T>   插件类型参数
-     * @return 插件实例，如果不存在，则返回 null
+     * 插件类型
+     * @param clazz
+     * 插件类型参数
+     * @param <T>
+     * 插件实例，如果不存在，则返回 null
+     * @return
      */
     private <T> T getPlugin(Class<T> clazz) {
         try {
