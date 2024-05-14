@@ -1,6 +1,7 @@
 package io.gitee.busilaoni.lagrangemcplugin.Bot;
 
 import com.alibaba.fastjson2.JSON;
+import io.gitee.busilaoni.lagrangemcplugin.Entity.Anonymous;
 import io.gitee.busilaoni.lagrangemcplugin.Enums.Api;
 import io.gitee.busilaoni.lagrangemcplugin.Result.ApiResult;
 import org.java_websocket.server.WebSocketServer;
@@ -94,6 +95,359 @@ public class Bot {
         Map map = new HashMap();
         map.put("message_id", messageId);
         socketServer.broadcast(JSON.toJSONString(getApiResult(Api.GET_FORWARD_MSG,map)));
+    }
+
+    /**
+     * 发送好友赞
+     * param userId 对方QQ号
+     * param times 赞的次数，每个好友每天最多10次 默认值1
+     */
+    public static void sendLike(Long userId, Integer times){
+        Map map = new HashMap();
+        map.put("user_id", userId);
+        map.put("times", times);
+        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.SEND_LIKE,map)));
+    }
+
+    /**
+     * 群组踢人
+     * param groupId
+     * param userId
+     * param rejectAddRequest
+     */
+    public static void setGroupKick(Long groupId ,Long userId, boolean rejectAddRequest){
+        Map map = new HashMap();
+        map.put("group_id", groupId);
+        map.put("user_id", userId);
+        map.put("reject_add_request", rejectAddRequest);
+        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.SET_GROUP_KICK,map)));
+    }
+
+    /**
+     * 群组单人禁言
+     * param groupId 群号
+     * param userId 要禁言的QQ号
+     * param duration 禁言时长，单位秒，0表示取消禁言
+     */
+    public static void setGroupBan(Long groupId ,Long userId, Long duration){
+        Map map = new HashMap();
+        map.put("group_id", groupId);
+        map.put("user_id", userId);
+        map.put("duration", duration);
+        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.SET_GROUP_BAN,map)));
+    }
+
+    /**
+     * 群组匿名用户禁言
+     * param groupId 群号
+     * param anonymous 可选，要禁言的匿名用户对象（群消息上报的 anonymous 字段）
+     * param anonymousFlag 可选，要禁言的匿名用户的 flag（需从群消息上报的数据中获得）
+     * param duration 禁言时长，单位秒，无法取消匿名用户禁言
+     */
+    public static void setGroupAnonymousBan(Long groupId , Anonymous anonymous, String anonymousFlag, Long duration){
+        Map map = new HashMap();
+        map.put("group_id", groupId);
+        map.put("anonymous", anonymous);
+        map.put("anonymous_flag", anonymousFlag);
+        map.put("duration", duration);
+        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.SET_GROUP_ANONYMOUS_BAN,map)));
+    }
+
+    /**
+     * 群组全员禁言
+     * param groupId 群号
+     * param enable 是否禁言
+     */
+    public static void setGroupWholeBan(Long groupId, boolean enable){
+        Map map = new HashMap();
+        map.put("group_id", groupId);
+        map.put("enable", enable);
+        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.SET_GROUP_WHOLE_BAN,map)));
+    }
+
+    /**
+     * 群组设置管理员
+     * param groupId 群号
+     * param userId 要设置管理员的 QQ 号
+     * param enable true 为设置，false 为取消
+     */
+    public static void setGroupAdmin(Long groupId, Long userId, boolean enable){
+        Map map = new HashMap();
+        map.put("group_id", groupId);
+        map.put("user_id", userId);
+        map.put("enable", enable);
+        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.SET_GROUP_ADMIN,map)));
+    }
+
+    /**
+     * 群组匿名
+     * param groupId 群号
+     * param enable 是否允许匿名聊天
+     */
+    public static void setGroupAnonymous(Long groupId, boolean enable){
+        Map map = new HashMap();
+        map.put("group_id", groupId);
+        map.put("enable", enable);
+        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.SET_GROUP_ANONYMOUS,map)));
+    }
+
+    /**
+     * 设置群成员备注
+     * param groupId 群号
+     * param userId 要设置的QQ号
+     * param card 群名片内容，不填或空字符串表示删除群成员备注
+     */
+    public static void setGroupCard(Long groupId, Long userId, String card){
+        Map map = new HashMap();
+        map.put("group_id", groupId);
+        map.put("user_id", userId);
+        map.put("card", card);
+        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.SET_GROUP_CARD,map)));
+    }
+
+    /**
+     * 设置群名
+     * param groupId 群号
+     * param groupName 新群名
+     */
+    public static void setGroupName(Long groupId, String groupName){
+        Map map = new HashMap();
+        map.put("group_id", groupId);
+        map.put("group_name", groupName);
+        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.SET_GROUP_NAME,map)));
+    }
+
+    /**
+     * 退出群组
+     * param groupId 群号
+     * param isDismiss 是否解散，如果登录号是群主，则仅在此项为true时能够解散
+     */
+    public static void setGroupLeave(Long groupId, boolean isDismiss){
+        Map map = new HashMap();
+        map.put("group_id", groupId);
+        map.put("is_dismiss", isDismiss);
+        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.SET_GROUP_LEAVE,map)));
+    }
+
+    /**
+     * 设置群组专属头衔
+     * param groupId 群号
+     * param userId 要设置的QQ号
+     * param specialTitle 专属头衔，不填或空字符串表示删除专属头衔
+     * param duration 专属头衔有效期，单位秒，-1 表示永久，不过此项似乎没有效果，可能是只有某些特殊的时间长度有效，有待测试
+     */
+    public static void setGroupSpecialTitle(Long groupId, Long userId, String specialTitle, Integer duration){
+        Map map = new HashMap();
+        map.put("group_id", groupId);
+        map.put("user_id", userId);
+        map.put("special_title", specialTitle);
+        map.put("duration", duration);
+        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.SET_GROUP_SPECIAL_TITLE,map)));
+    }
+
+    /**
+     * 处理加好友请求
+     * param flag 加好友请求的 flag（需从上报的数据中获得）
+     * param approve 是否同意请求
+     * param remark 添加后的好友备注（仅在同意时有效）
+     */
+    public static void setFriendAddRequest(String flag, boolean approve, String remark){
+        Map map = new HashMap();
+        map.put("flag", flag);
+        map.put("approve", approve);
+        map.put("remark", remark);
+        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.SET_FRIEND_ADD_REQUEST,map)));
+    }
+
+    /**
+     * 处理加群请求／邀请
+     * param flag 加群请求的 flag（需从上报的数据中获得）
+     * param subType add或invite，请求类型（需要和上报消息中的sub_type字段相符）
+     * param approve 是否同意请求／邀请，默认值true
+     * param reason 拒绝理由（仅在拒绝时有效）
+     */
+    public static void setGroupAddRequest(String flag, String subType,boolean approve, String reason){
+        Map map = new HashMap();
+        map.put("flag", flag);
+        map.put("sub_type", subType);
+        map.put("approve", approve);
+        map.put("reason", reason);
+        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.SET_GROUP_ADD_REQUEST,map)));
+    }
+
+    /**
+     * 获取登录号信息
+     */
+    public static void getLoginInfo(){
+        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.GET_LOGIN_INFO,null)));
+    }
+
+    /**
+     * 获取陌生人信息
+     * param userId QQ号
+     * param noCache 是否不使用缓存（使用缓存可能更新不及时，但响应更快） 默认值false
+     */
+    public static void getStrangerInfo(Long userId, boolean noCache){
+        Map map = new HashMap();
+        map.put("user_id", userId);
+        map.put("no_cache", noCache);
+        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.GET_STRANGER_INFO,map)));
+    }
+
+    /**
+     * 获取好友列表
+     */
+    public static void getFriendList(){
+        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.GET_FRIEND_LIST,null)));
+    }
+
+    /**
+     * 获取群信息
+     * param groupId 群号
+     * param noCache 是否不使用缓存（使用缓存可能更新不及时，但响应更快） 默认值false
+     */
+    public static void getGroupInfo(Long groupId, boolean noCache){
+        Map map = new HashMap();
+        map.put("group_id", groupId);
+        map.put("no_cache", noCache);
+        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.GET_GROUP_INFO,map)));
+    }
+
+    /**
+     * 获取群列表
+     */
+    public static void getGroupList(){
+        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.GET_GROUP_List,null)));
+    }
+
+    /**
+     * 获取群成员信息
+     * param groupId 群号
+     * param userId QQ号
+     * param noCache 是否不使用缓存（使用缓存可能更新不及时，但响应更快） 默认值false
+     */
+    public static void getGroupMemberInfo(Long groupId, Long userId, boolean noCache){
+        Map map = new HashMap();
+        map.put("group_id", groupId);
+        map.put("user_id", userId);
+        map.put("no_cache", noCache);
+        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.GET_GROUP_MEMBER_INFO,map)));
+    }
+
+    /**
+     * 获取群成员列表
+     * param groupId 群号
+     */
+    public static void getGroupMemberList(Long groupId){
+        Map map = new HashMap();
+        map.put("group_id", groupId);
+        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.GET_GROUP_MEMBER_LIST,map)));
+    }
+
+    /**
+     * 获取群荣誉信息
+     * param groupId 群号
+     * param type 要获取的群荣誉类型，可传入talkative、performer、legend、strong_newbie、emotion以分别获取单个类型的群荣誉数据，或传入 all获取所有数据
+     */
+    public static void getGroupHonorInfo(Long groupId, String type){
+        Map map = new HashMap();
+        map.put("group_id", groupId);
+        map.put("type", type);
+        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.GET_GROUP_HONOR_INFO,map)));
+    }
+
+    /**
+     * 获取 Cookies
+     * param domain 需要获取cookies的域名
+     */
+    public static void getCookies(String domain){
+        Map map = new HashMap();
+        map.put("domain", domain);
+        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.GET_COOKIES,map)));
+    }
+
+    /**
+     * 获取CSRF Token
+     */
+    public static void getCsrfToken(){
+        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.GET_CSRF_TOKEN,null)));
+    }
+
+    /**
+     * 获取QQ相关接口凭证
+     * param domain 需要获取cookies的域名
+     */
+    public static void getCredentials(String domain){
+        Map map = new HashMap();
+        map.put("domain", domain);
+        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.GET_CREDENTIALS,map)));
+    }
+
+    /**
+     * 获取语音
+     * param file 收到的语音文件名（消息段的file参数），如0B38145AA44505000B38145AA4450500.silk
+     * param outFormat 转换到的格式，目前支持mp3、amr、wma、m4a、spx、ogg、wav、flac
+     */
+    public static void getRecord(String file, String outFormat){
+        Map map = new HashMap();
+        map.put("file", file);
+        map.put("out_format", outFormat);
+        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.GET_RECORD,map)));
+    }
+
+    /**
+     * 获取图片
+     * param file 收到的图片文件名（消息段的file参数），如6B4DE3DFD1BD271E3297859D41C530F5.jpg
+     */
+    public static void getImage(String file){
+        Map map = new HashMap();
+        map.put("file", file);
+        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.GET_IMAGE,map)));
+    }
+
+    /**
+     * 检查是否可以发送图片
+     */
+    public static void canSendImage(){
+        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.CAN_SEND_IMAGE,null)));
+    }
+
+    /**
+     * 检查是否可以发送语音
+     */
+    public static void canSendRecord(){
+        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.CAN_SEND_RECORD,null)));
+    }
+
+    /**
+     * 获取运行状态
+     */
+    public static void getStatus(){
+        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.GET_STATUS,null)));
+    }
+
+    /**
+     * 获取版本信息
+     */
+    public static void getVersionInfo(){
+        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.GET_VERSION_INFO,null)));
+    }
+
+    /**
+     * 重启OneBot实现
+     * param delay 要延迟的毫秒数，如果默认情况下无法重启，可以尝试设置延迟为2000左右
+     */
+    public static void setRestart(Integer delay){
+        Map map = new HashMap();
+        map.put("delay", delay);
+        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.SET_RESTART,map)));
+    }
+
+    /**
+     * 清理缓存
+     */
+    public static void cleanCache(){
+        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.CLEAN_CACHE,null)));
     }
 
     /**

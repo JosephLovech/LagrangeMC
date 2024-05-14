@@ -19,6 +19,7 @@ public class CQMsg extends ArrayList {
 
     /**
      * QQ表情
+     * 详情参考 https://github.com/kyubotics/coolq-http-api/wiki/%E8%A1%A8%E6%83%85-CQ-%E7%A0%81-ID-%E8%A1%A8
      * param id QQ表情Id
      * return
      */
