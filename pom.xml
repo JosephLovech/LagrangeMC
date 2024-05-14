@@ -4,14 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.gitee.soulgoodmans</groupId>
+    <groupId>io.github.JosephLovech</groupId>
     <artifactId>LagrangeMCPlugin</artifactId>
     <version>0.0.1</version>
     <packaging>jar</packaging>
 
     <name>LagrangeMCPlugin</name>
 
-    <url>https://gitee.com/soulgoodmans/LagrangeMC</url>
+    <url>https://github.com/JosephLovech/LagrangeMC</url>
 
     <licenses>
         <license>
@@ -21,9 +21,9 @@
     </licenses>
 
     <scm>
-        <connection>https://gitee.com/soulgoodmans/LagrangeMC.git</connection>
-        <developerConnection>scm:git:ssh://git@gitee.com:soulgoodmans/LagrangeMC.git</developerConnection>
-        <url>https://gitee.com/soulgoodmans/LagrangeMC</url>
+        <connection>https://github.com/JosephLovech/LagrangeMC.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com:JosephLovech/LagrangeMC.git</developerConnection>
+        <url>https://github.com/JosephLovech/LagrangeMC</url>
     </scm>
 
     <developers>

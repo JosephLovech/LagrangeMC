@@ -1,4 +1,4 @@
-package io.gitee.soulgoodmans.lagrangemcplugin.Utils;
+package io.github.JosephLovech.lagrangemcplugin.Utils;
 
 import java.util.ArrayList;
 

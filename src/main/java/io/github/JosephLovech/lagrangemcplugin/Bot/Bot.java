@@ -1,8 +1,8 @@
-package io.gitee.soulgoodmans.lagrangemcplugin.Bot;
+package io.github.JosephLovech.lagrangemcplugin.Bot;
 
 import com.alibaba.fastjson2.JSON;
-import io.gitee.soulgoodmans.lagrangemcplugin.Enums.Api;
-import io.gitee.soulgoodmans.lagrangemcplugin.Result.ApiResult;
+import io.github.JosephLovech.lagrangemcplugin.Enums.Api;
+import io.github.JosephLovech.lagrangemcplugin.Result.ApiResult;
 import org.java_websocket.server.WebSocketServer;
 
 import java.util.HashMap;

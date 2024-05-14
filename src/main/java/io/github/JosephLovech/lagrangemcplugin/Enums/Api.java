@@ -1,4 +1,4 @@
-package io.gitee.soulgoodmans.lagrangemcplugin.Enums;
+package io.github.JosephLovech.lagrangemcplugin.Enums;
 
 /**
  * api枚举类

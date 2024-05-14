@@ -1,4 +1,4 @@
-package io.gitee.soulgoodmans.lagrangemcplugin.Result;
+package io.github.JosephLovech.lagrangemcplugin.Result;
 
 import com.alibaba.fastjson2.annotation.JSONField;
 import lombok.Data;

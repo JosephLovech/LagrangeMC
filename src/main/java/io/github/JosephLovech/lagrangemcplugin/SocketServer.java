@@ -1,9 +1,9 @@
-package io.gitee.soulgoodmans.lagrangemcplugin;
+package io.github.JosephLovech.lagrangemcplugin;
 
 import com.alibaba.fastjson2.JSONObject;
-import io.gitee.soulgoodmans.lagrangemcplugin.Bot.BotPlugin;
-import io.gitee.soulgoodmans.lagrangemcplugin.Event.Message.GroupMessageEvent;
-import io.gitee.soulgoodmans.lagrangemcplugin.Event.Message.PrivateMessageEvent;
+import io.github.JosephLovech.lagrangemcplugin.Bot.BotPlugin;
+import io.github.JosephLovech.lagrangemcplugin.Event.Message.GroupMessageEvent;
+import io.github.JosephLovech.lagrangemcplugin.Event.Message.PrivateMessageEvent;
 import lombok.Data;
 import org.bukkit.Bukkit;
 import org.java_websocket.WebSocket;

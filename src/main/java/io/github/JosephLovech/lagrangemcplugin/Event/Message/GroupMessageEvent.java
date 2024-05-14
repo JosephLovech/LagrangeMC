@@ -1,8 +1,8 @@
-package io.gitee.soulgoodmans.lagrangemcplugin.Event.Message;
+package io.github.JosephLovech.lagrangemcplugin.Event.Message;
 
 import com.alibaba.fastjson2.annotation.JSONField;
-import io.gitee.soulgoodmans.lagrangemcplugin.Event.Anonymous;
-import io.gitee.soulgoodmans.lagrangemcplugin.Event.Sender;
+import io.github.JosephLovech.lagrangemcplugin.Event.Anonymous;
+import io.github.JosephLovech.lagrangemcplugin.Event.Sender;
 import lombok.Data;
 
 /**

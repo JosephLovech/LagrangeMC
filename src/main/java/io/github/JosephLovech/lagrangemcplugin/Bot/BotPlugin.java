@@ -1,8 +1,8 @@
-package io.gitee.soulgoodmans.lagrangemcplugin.Bot;
+package io.github.JosephLovech.lagrangemcplugin.Bot;
 
 
-import io.gitee.soulgoodmans.lagrangemcplugin.Event.Message.GroupMessageEvent;
-import io.gitee.soulgoodmans.lagrangemcplugin.Event.Message.PrivateMessageEvent;
+import io.github.JosephLovech.lagrangemcplugin.Event.Message.GroupMessageEvent;
+import io.github.JosephLovech.lagrangemcplugin.Event.Message.PrivateMessageEvent;
 
 import java.util.ArrayList;
 import java.util.List;
