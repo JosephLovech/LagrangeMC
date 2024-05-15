@@ -3,6 +3,8 @@ package io.gitee.busilaoni.lagrangemcplugin.Bot;
 
 import io.gitee.busilaoni.lagrangemcplugin.Event.Message.GroupMessageEvent;
 import io.gitee.busilaoni.lagrangemcplugin.Event.Message.PrivateMessageEvent;
+import io.gitee.busilaoni.lagrangemcplugin.Event.Meta.HeartbeatMetaEvent;
+import io.gitee.busilaoni.lagrangemcplugin.Event.Meta.LifecycleMetaEvent;
 import io.gitee.busilaoni.lagrangemcplugin.Event.Notice.*;
 import io.gitee.busilaoni.lagrangemcplugin.Event.Request.FriendRequestEvent;
 import io.gitee.busilaoni.lagrangemcplugin.Event.Request.GroupRequestEvent;
@@ -64,7 +66,7 @@ public abstract class BotPlugin {
      * param event 事件内容
      * return 消息是否处理完毕,`MatchedAndBlock`表示处理完毕不继续下一个插件处理,`NotMatch`表示未处理并继续下一个插件处理
      */
-    public int onGroupReduce(GroupReduceNoticeEvent event) {
+    public int onGroupDecrease(GroupDecreaseNoticeEvent event) {
         return NotMatch;
     }
 
@@ -155,6 +157,24 @@ public abstract class BotPlugin {
      * return 消息是否处理完毕,`MatchedAndBlock`表示处理完毕不继续下一个插件处理,`NotMatch`表示未处理并继续下一个插件处理
      */
     public int onGroupRequest(GroupRequestEvent event) {
+        return NotMatch;
+    }
+
+    /**
+     * 收到生命周期时调用此方法
+     * param event 事件内容
+     * return 消息是否处理完毕,`MatchedAndBlock`表示处理完毕不继续下一个插件处理,`NotMatch`表示未处理并继续下一个插件处理
+     */
+    public int onLifecycleMeta(LifecycleMetaEvent event) {
+        return NotMatch;
+    }
+
+    /**
+     * 收到心跳时调用此方法
+     * param event 事件内容
+     * return 消息是否处理完毕,`MatchedAndBlock`表示处理完毕不继续下一个插件处理,`NotMatch`表示未处理并继续下一个插件处理
+     */
+    public int onHeartbeatMeta(HeartbeatMetaEvent event) {
         return NotMatch;
     }
 

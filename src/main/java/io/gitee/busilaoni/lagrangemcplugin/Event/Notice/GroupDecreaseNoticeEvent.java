@@ -7,7 +7,7 @@ import lombok.Data;
  * 群成员减少事件
  */
 @Data
-public class GroupReduceNoticeEvent extends NoticeEvent{
+public class GroupDecreaseNoticeEvent extends NoticeEvent{
 
     /**
      * 事件子类型，分别表示主动退群、成员被踢、登录号被踢 leave、kick、kick_me
