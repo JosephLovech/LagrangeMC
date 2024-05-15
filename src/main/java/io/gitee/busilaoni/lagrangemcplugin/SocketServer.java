@@ -160,7 +160,7 @@ public class SocketServer extends WebSocketServer {
                 LifecycleMetaEvent lifecycleMetaEvent = jsonObject.toJavaObject(LifecycleMetaEvent.class);
                 //转发执行
                 handlePluginMessages(botPlugin -> botPlugin.onLifecycleMeta(lifecycleMetaEvent));
-                break;
+            break;
 
             /**
              * 心跳
@@ -359,7 +359,7 @@ public class SocketServer extends WebSocketServer {
                 FriendRequestEvent friendRequestEvent = jsonObject.toJavaObject(FriendRequestEvent.class);
                 //转发执行
                 handlePluginMessages(botPlugin -> botPlugin.onFriendRequest(friendRequestEvent));
-                break;
+            break;
 
             /**
              * 加群请求/邀请
@@ -369,14 +369,14 @@ public class SocketServer extends WebSocketServer {
                 GroupRequestEvent groupRequestEvent = jsonObject.toJavaObject(GroupRequestEvent.class);
                 //转发执行
                 handlePluginMessages(botPlugin -> botPlugin.onGroupRequest(groupRequestEvent));
-                break;
+            break;
 
             /**
              * 其他消息
              */
             default:
                 Bukkit.getLogger().warning(String.format("Unknown message_type: %s",jsonObject.toString()));
-                break;
+            break;
         }
     }
 
