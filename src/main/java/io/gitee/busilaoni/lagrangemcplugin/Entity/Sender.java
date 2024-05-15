@@ -24,12 +24,6 @@ public class Sender {
     private String nickname;
 
     /**
-     * 群名片/备注
-     */
-    @JSONField(name = "card")
-    private String card;
-
-    /**
      * 性别 male、female、unknown
      */
     @JSONField(name = "sex")
@@ -40,6 +34,12 @@ public class Sender {
      */
     @JSONField(name = "age")
     private Long age;
+
+    /**
+     * 群名片/备注
+     */
+    @JSONField(name = "card")
+    private String card;
 
     /**
      * 地区

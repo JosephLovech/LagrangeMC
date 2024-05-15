@@ -17,12 +17,6 @@ public class MessageEvent extends BaseEvent {
     private String messageType;
 
     /**
-     * 消息id
-     */
-    @JSONField(name = "message_id")
-    private Long MessageId;
-
-    /**
      * 发送者QQ号
      */
     @JSONField(name = "user_id")

@@ -11,6 +11,12 @@ import lombok.Data;
 public class PrivateMessageEvent extends MessageEvent{
 
     /**
+     * 消息id
+     */
+    @JSONField(name = "message_id")
+    private Long MessageId;
+
+    /**
      * 消息子类型，如果是好友则是friend,如果是群临时会话则是group
      */
     @JSONField(name = "sub_type")

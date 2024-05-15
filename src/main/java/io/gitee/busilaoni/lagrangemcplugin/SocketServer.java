@@ -109,6 +109,8 @@ public class SocketServer extends WebSocketServer {
         //获取messageType类型
         String messageType = jsonObject.getString("message_type");
 
+        Bukkit.getLogger().info(jsonObject.toString());
+
         switch (messageType){
 
             /**
