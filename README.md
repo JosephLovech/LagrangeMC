@@ -53,7 +53,7 @@ rcon:
   #服务器ip
   host: localhost
   #密码
-  password: Dadiao266.com
+  password: 114514
 ~~~
 
 
