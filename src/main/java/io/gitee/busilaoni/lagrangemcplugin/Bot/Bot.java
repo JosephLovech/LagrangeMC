@@ -5,6 +5,7 @@ import io.gitee.busilaoni.lagrangemcplugin.Data.ApiData;
 import io.gitee.busilaoni.lagrangemcplugin.Data.DataEntity.*;
 import io.gitee.busilaoni.lagrangemcplugin.Entity.Anonymous;
 import io.gitee.busilaoni.lagrangemcplugin.Enums.Api;
+import io.gitee.busilaoni.lagrangemcplugin.Handler.ApiHandler;
 import io.gitee.busilaoni.lagrangemcplugin.Handler.ApiSender;
 import io.gitee.busilaoni.lagrangemcplugin.Result.ApiResult;
 
@@ -29,7 +30,7 @@ public class Bot {
         map.put("user_id",userId);
         map.put("message",message);
         map.put("auto_escape",escape);
-        return ApiSender.sendApiJson(Api.SEND_PRIVATE_MSG,map).to(new TypeReference<ApiData<MessageRespData>>() {
+        return ApiHandler.sendApiJson(Api.SEND_PRIVATE_MSG,map).to(new TypeReference<ApiData<MessageRespData>>() {
         });
     }
 
@@ -45,7 +46,7 @@ public class Bot {
         map.put("group_id",groupId);
         map.put("message",message);
         map.put("auto_escape",escape);
-        return ApiSender.sendApiJson(Api.SEND_GROUP_MSG,map).to(new TypeReference<ApiData<MessageRespData>>() {
+        return ApiHandler.sendApiJson(Api.SEND_GROUP_MSG,map).to(new TypeReference<ApiData<MessageRespData>>() {
         });
     }
 
@@ -64,7 +65,7 @@ public class Bot {
         map.put("group_id",groupId);
         map.put("message",message);
         map.put("auto_escape",escape);
-        return ApiSender.sendApiJson(Api.SEND_MSG,map).to(new TypeReference<ApiData<MessageRespData>>() {
+        return ApiHandler.sendApiJson(Api.SEND_MSG,map).to(new TypeReference<ApiData<MessageRespData>>() {
         });
     }
 
@@ -75,7 +76,7 @@ public class Bot {
     public static void deleteMessage(Long messageId){
         Map map = new HashMap();
         map.put("message_id", messageId);
-        ApiSender.sendApiJson(Api.DELETE_MSG,map);
+        ApiHandler.sendApiJson(Api.DELETE_MSG,map);
     }
 
     /**
@@ -85,7 +86,7 @@ public class Bot {
     public static ApiData<MessageData> getMessage(Long messageId){
         Map map = new HashMap();
         map.put("message_id", messageId);
-        return ApiSender.sendApiJson(Api.GET_MSG,map).to(new TypeReference<ApiData<MessageData>>() {
+        return ApiHandler.sendApiJson(Api.GET_MSG,map).to(new TypeReference<ApiData<MessageData>>() {
         });
     }
 
@@ -96,7 +97,7 @@ public class Bot {
     public static String getForwardMessage(String id){
         Map map = new HashMap();
         map.put("id", id);
-        return ApiSender.sendApiJson(Api.GET_FORWARD_MSG,map).toJavaObject(String.class);
+        return ApiHandler.sendApiJson(Api.GET_FORWARD_MSG,map).toJavaObject(String.class);
     }
 
     /**
@@ -108,7 +109,7 @@ public class Bot {
         Map map = new HashMap();
         map.put("user_id", userId);
         map.put("times", times);
-        ApiSender.sendApiJson(Api.SEND_LIKE,map);
+        ApiHandler.sendApiJson(Api.SEND_LIKE,map);
     }
 
     /**
@@ -122,7 +123,7 @@ public class Bot {
         map.put("group_id", groupId);
         map.put("user_id", userId);
         map.put("reject_add_request", rejectAddRequest);
-        ApiSender.sendApiJson(Api.SET_GROUP_KICK,map);
+        ApiHandler.sendApiJson(Api.SET_GROUP_KICK,map);
     }
 
     /**
@@ -136,7 +137,7 @@ public class Bot {
         map.put("group_id", groupId);
         map.put("user_id", userId);
         map.put("duration", duration);
-        ApiSender.sendApiJson(Api.SET_GROUP_BAN,map);
+        ApiHandler.sendApiJson(Api.SET_GROUP_BAN,map);
     }
 
     /**
@@ -152,7 +153,7 @@ public class Bot {
         map.put("anonymous", anonymous);
         map.put("anonymous_flag", anonymousFlag);
         map.put("duration", duration);
-        ApiSender.sendApiJson(Api.SET_GROUP_ANONYMOUS_BAN,map);
+        ApiHandler.sendApiJson(Api.SET_GROUP_ANONYMOUS_BAN,map);
     }
 
     /**
@@ -164,7 +165,7 @@ public class Bot {
         Map map = new HashMap();
         map.put("group_id", groupId);
         map.put("enable", enable);
-        ApiSender.sendApiJson(Api.SET_GROUP_WHOLE_BAN,map);
+        ApiHandler.sendApiJson(Api.SET_GROUP_WHOLE_BAN,map);
     }
 
     /**
@@ -178,7 +179,7 @@ public class Bot {
         map.put("group_id", groupId);
         map.put("user_id", userId);
         map.put("enable", enable);
-        ApiSender.sendApiJson(Api.SET_GROUP_ADMIN,map);
+        ApiHandler.sendApiJson(Api.SET_GROUP_ADMIN,map);
     }
 
     /**
@@ -190,7 +191,7 @@ public class Bot {
         Map map = new HashMap();
         map.put("group_id", groupId);
         map.put("enable", enable);
-        ApiSender.sendApiJson(Api.SET_GROUP_ANONYMOUS,map);
+        ApiHandler.sendApiJson(Api.SET_GROUP_ANONYMOUS,map);
     }
 
     /**
@@ -204,7 +205,7 @@ public class Bot {
         map.put("group_id", groupId);
         map.put("user_id", userId);
         map.put("card", card);
-        ApiSender.sendApiJson(Api.SET_GROUP_CARD,map);
+        ApiHandler.sendApiJson(Api.SET_GROUP_CARD,map);
     }
 
     /**
@@ -216,7 +217,7 @@ public class Bot {
         Map map = new HashMap();
         map.put("group_id", groupId);
         map.put("group_name", groupName);
-        ApiSender.sendApiJson(Api.SET_GROUP_NAME,map);
+        ApiHandler.sendApiJson(Api.SET_GROUP_NAME,map);
     }
 
     /**
@@ -228,7 +229,7 @@ public class Bot {
         Map map = new HashMap();
         map.put("group_id", groupId);
         map.put("is_dismiss", isDismiss);
-        ApiSender.sendApiJson(Api.SET_GROUP_LEAVE,map);
+        ApiHandler.sendApiJson(Api.SET_GROUP_LEAVE,map);
     }
 
     /**
@@ -244,7 +245,7 @@ public class Bot {
         map.put("user_id", userId);
         map.put("special_title", specialTitle);
         map.put("duration", duration);
-        ApiSender.sendApiJson(Api.SET_GROUP_SPECIAL_TITLE,map);
+        ApiHandler.sendApiJson(Api.SET_GROUP_SPECIAL_TITLE,map);
     }
 
     /**
@@ -258,7 +259,7 @@ public class Bot {
         map.put("flag", flag);
         map.put("approve", approve);
         map.put("remark", remark);
-        ApiSender.sendApiJson(Api.SET_FRIEND_ADD_REQUEST,map);
+        ApiHandler.sendApiJson(Api.SET_FRIEND_ADD_REQUEST,map);
     }
 
     /**
@@ -274,14 +275,14 @@ public class Bot {
         map.put("sub_type", subType);
         map.put("approve", approve);
         map.put("reason", reason);
-        ApiSender.sendApiJson(Api.SET_GROUP_ADD_REQUEST,map);
+        ApiHandler.sendApiJson(Api.SET_GROUP_ADD_REQUEST,map);
     }
 
     /**
      * 获取登录号信息
      */
     public static ApiData<LoginInfoData> getLoginInfo(){
-        return ApiSender.sendApiJson(Api.GET_LOGIN_INFO,null).to(new TypeReference<ApiData<LoginInfoData>>() {
+        return ApiHandler.sendApiJson(Api.GET_LOGIN_INFO,null).to(new TypeReference<ApiData<LoginInfoData>>() {
         });
     }
 
@@ -294,7 +295,7 @@ public class Bot {
         Map map = new HashMap();
         map.put("user_id", userId);
         map.put("no_cache", noCache);
-        return ApiSender.sendApiJson(Api.GET_STRANGER_INFO,map).to(new TypeReference<ApiData<StrangerData>>() {
+        return ApiHandler.sendApiJson(Api.GET_STRANGER_INFO,map).to(new TypeReference<ApiData<StrangerData>>() {
         });
     }
 
@@ -302,7 +303,7 @@ public class Bot {
      * 获取好友列表
      */
     public static ApiData<List<FriendInfoData>> getFriendList(){
-        return ApiSender.sendApiJson(Api.GET_FRIEND_LIST,null).to(new TypeReference<ApiData<List<FriendInfoData>>>() {
+        return ApiHandler.sendApiJson(Api.GET_FRIEND_LIST,null).to(new TypeReference<ApiData<List<FriendInfoData>>>() {
         });
     }
 
@@ -315,7 +316,7 @@ public class Bot {
         Map map = new HashMap();
         map.put("group_id", groupId);
         map.put("no_cache", noCache);
-        return ApiSender.sendApiJson(Api.GET_GROUP_INFO,map).to(new TypeReference<ApiData<GroupInfoData>>() {
+        return ApiHandler.sendApiJson(Api.GET_GROUP_INFO,map).to(new TypeReference<ApiData<GroupInfoData>>() {
         });
     }
 
@@ -323,7 +324,7 @@ public class Bot {
      * 获取群列表
      */
     public static ApiData<List<GroupInfoData>> getGroupList(){
-        return ApiSender.sendApiJson(Api.GET_GROUP_List,null).to(new TypeReference<ApiData<List<GroupInfoData>>>() {
+        return ApiHandler.sendApiJson(Api.GET_GROUP_List,null).to(new TypeReference<ApiData<List<GroupInfoData>>>() {
         });
     }
 
@@ -338,7 +339,7 @@ public class Bot {
         map.put("group_id", groupId);
         map.put("user_id", userId);
         map.put("no_cache", noCache);
-        return ApiSender.sendApiJson(Api.GET_GROUP_MEMBER_INFO,map).to(new TypeReference<ApiData<GroupMemberInfoData>>() {
+        return ApiHandler.sendApiJson(Api.GET_GROUP_MEMBER_INFO,map).to(new TypeReference<ApiData<GroupMemberInfoData>>() {
         });
     }
 
@@ -349,7 +350,7 @@ public class Bot {
     public static ApiData<List<GroupMemberInfoData>> getGroupMemberList(Long groupId){
         Map map = new HashMap();
         map.put("group_id", groupId);
-        return ApiSender.sendApiJson(Api.GET_GROUP_MEMBER_LIST,map).to(new TypeReference<ApiData<List<GroupMemberInfoData>>>() {
+        return ApiHandler.sendApiJson(Api.GET_GROUP_MEMBER_LIST,map).to(new TypeReference<ApiData<List<GroupMemberInfoData>>>() {
         });
     }
 
@@ -362,7 +363,7 @@ public class Bot {
         Map map = new HashMap();
         map.put("group_id", groupId);
         map.put("type", type);
-        return ApiSender.sendApiJson(Api.GET_GROUP_HONOR_INFO,map).to(new TypeReference<ApiData<GroupHonorData>>() {
+        return ApiHandler.sendApiJson(Api.GET_GROUP_HONOR_INFO,map).to(new TypeReference<ApiData<GroupHonorData>>() {
         });
     }
 
@@ -373,7 +374,7 @@ public class Bot {
     public static ApiData<CookiesData> getCookies(String domain){
         Map map = new HashMap();
         map.put("domain", domain);
-        return ApiSender.sendApiJson(Api.GET_COOKIES,map).to(new TypeReference<ApiData<CookiesData>>() {
+        return ApiHandler.sendApiJson(Api.GET_COOKIES,map).to(new TypeReference<ApiData<CookiesData>>() {
         });
     }
 
@@ -381,7 +382,7 @@ public class Bot {
      * 获取CSRF Token
      */
     public static ApiData<CSRFTokenData> getCsrfToken(){
-        return ApiSender.sendApiJson(Api.GET_CSRF_TOKEN,null).to(new TypeReference<ApiData<CSRFTokenData>>() {
+        return ApiHandler.sendApiJson(Api.GET_CSRF_TOKEN,null).to(new TypeReference<ApiData<CSRFTokenData>>() {
         });
     }
 
@@ -392,7 +393,7 @@ public class Bot {
     public static ApiData<CredentialsData> getCredentials(String domain){
         Map map = new HashMap();
         map.put("domain", domain);
-        return ApiSender.sendApiJson(Api.GET_CREDENTIALS,map).to(new TypeReference<ApiData<CredentialsData>>() {
+        return ApiHandler.sendApiJson(Api.GET_CREDENTIALS,map).to(new TypeReference<ApiData<CredentialsData>>() {
         });
     }
 
@@ -405,7 +406,7 @@ public class Bot {
         Map map = new HashMap();
         map.put("file", file);
         map.put("out_format", outFormat);
-        return ApiSender.sendApiJson(Api.GET_RECORD,map).to(new TypeReference<ApiData<FileData>>() {
+        return ApiHandler.sendApiJson(Api.GET_RECORD,map).to(new TypeReference<ApiData<FileData>>() {
         });
     }
 
@@ -416,7 +417,7 @@ public class Bot {
     public static ApiData<FileData> getImage(String file){
         Map map = new HashMap();
         map.put("file", file);
-        return ApiSender.sendApiJson(Api.GET_IMAGE,map).to(new TypeReference<ApiData<FileData>>() {
+        return ApiHandler.sendApiJson(Api.GET_IMAGE,map).to(new TypeReference<ApiData<FileData>>() {
         });
     }
 
@@ -424,7 +425,7 @@ public class Bot {
      * 检查是否可以发送图片
      */
     public static ApiData<ConformData> canSendImage(){
-        return ApiSender.sendApiJson(Api.CAN_SEND_IMAGE,null).to(new TypeReference<ApiData<ConformData>>() {
+        return ApiHandler.sendApiJson(Api.CAN_SEND_IMAGE,null).to(new TypeReference<ApiData<ConformData>>() {
         });
     }
 
@@ -432,7 +433,7 @@ public class Bot {
      * 检查是否可以发送语音
      */
     public static ApiData<ConformData> canSendRecord(){
-        return ApiSender.sendApiJson(Api.CAN_SEND_RECORD,null).to(new TypeReference<ApiData<ConformData>>() {
+        return ApiHandler.sendApiJson(Api.CAN_SEND_RECORD,null).to(new TypeReference<ApiData<ConformData>>() {
         });
     }
 
@@ -440,7 +441,7 @@ public class Bot {
      * 获取运行状态
      */
     public static ApiData<StatusData> getStatus(){
-        return ApiSender.sendApiJson(Api.GET_STATUS,null).to(new TypeReference<ApiData<StatusData>>() {
+        return ApiHandler.sendApiJson(Api.GET_STATUS,null).to(new TypeReference<ApiData<StatusData>>() {
         });
     }
 
@@ -448,7 +449,7 @@ public class Bot {
      * 获取版本信息
      */
     public static ApiData<VersionInfoData> getVersionInfo(){
-        return ApiSender.sendApiJson(Api.GET_VERSION_INFO,null).to(new TypeReference<ApiData<VersionInfoData>>() {
+        return ApiHandler.sendApiJson(Api.GET_VERSION_INFO,null).to(new TypeReference<ApiData<VersionInfoData>>() {
         });
     }
 
@@ -459,14 +460,14 @@ public class Bot {
     public static void setRestart(Integer delay){
         Map map = new HashMap();
         map.put("delay", delay);
-        ApiSender.sendApiJson(Api.SET_RESTART,map);
+        ApiHandler.sendApiJson(Api.SET_RESTART,map);
     }
 
     /**
      * 清理缓存
      */
     public static void cleanCache(){
-        ApiSender.sendApiJson(Api.CLEAN_CACHE,null);
+        ApiHandler.sendApiJson(Api.CLEAN_CACHE,null);
     }
 
     /**

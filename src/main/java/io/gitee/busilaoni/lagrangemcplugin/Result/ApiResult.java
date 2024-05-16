@@ -19,4 +19,10 @@ public class ApiResult {
      */
     @JSONField(name = "params")
     private Map params;
+
+    /**
+     * echo
+     */
+    @JSONField(name = "echo")
+    private Long echo;
 }

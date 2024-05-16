@@ -33,4 +33,10 @@ public class ApiData<T> {
      */
     @JSONField(name = "data")
     private T data;
+
+    /**
+     * echo
+     */
+    @JSONField(name = "echo")
+    private Long echo;
 }
