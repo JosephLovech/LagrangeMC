@@ -15,7 +15,7 @@ public class GroupMessageEvent extends MessageEvent{
      * 消息id
      */
     @JSONField(name = "message_id")
-    private Long MessageId;
+    private Long messageId;
 
     /**
      * 消息子类型、正常消息是normal、匿名消息是anonymous、系统提示note

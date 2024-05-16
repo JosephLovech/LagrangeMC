@@ -1,12 +1,15 @@
 package io.gitee.busilaoni.lagrangemcplugin.Bot;
 
-import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.TypeReference;
+import io.gitee.busilaoni.lagrangemcplugin.Data.ApiData;
+import io.gitee.busilaoni.lagrangemcplugin.Data.DataEntity.*;
 import io.gitee.busilaoni.lagrangemcplugin.Entity.Anonymous;
 import io.gitee.busilaoni.lagrangemcplugin.Enums.Api;
+import io.gitee.busilaoni.lagrangemcplugin.Handler.ApiSender;
 import io.gitee.busilaoni.lagrangemcplugin.Result.ApiResult;
-import org.java_websocket.server.WebSocketServer;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -15,23 +18,19 @@ import java.util.Map;
 public class Bot {
 
     /**
-     * websocket广播
-     */
-    public static WebSocketServer socketServer;
-
-    /**
      * 发送私聊消息
      *
      * param userId QQ号
      * param message 信息
      * param escape 消息内容是否作为纯文本发送
      */
-    public static void sendPrivateMessage(Long userId,String message, boolean escape){
+    public static ApiData<MessageRespData> sendPrivateMessage(Long userId, String message, boolean escape){
         Map map = new HashMap();
         map.put("user_id",userId);
         map.put("message",message);
         map.put("auto_escape",escape);
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.SEND_PRIVATE_MSG,map)));
+        return ApiSender.sendApiJson(Api.SEND_PRIVATE_MSG,map).to(new TypeReference<ApiData<MessageRespData>>() {
+        });
     }
 
     /**
@@ -41,12 +40,13 @@ public class Bot {
      * param message 信息
      * param escape 消息内容是否作为纯文本发送
      */
-    public static void sendGroupMessage(Long groupId,String message, boolean escape){
+    public static ApiData<MessageRespData> sendGroupMessage(Long groupId,String message, boolean escape){
         Map map = new HashMap();
         map.put("group_id",groupId);
         map.put("message",message);
         map.put("auto_escape",escape);
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.SEND_GROUP_MSG,map)));
+        return ApiSender.sendApiJson(Api.SEND_GROUP_MSG,map).to(new TypeReference<ApiData<MessageRespData>>() {
+        });
     }
 
     /**
@@ -57,14 +57,15 @@ public class Bot {
      * param message 要发送的内容
      * param escape 消息内容是否作为纯文本发送（即不解析 CQ 码），只在 message 字段是字符串时有效
      */
-    public static void sendMessage(String messageType, Long userId, Long groupId, String message, boolean escape){
+    public static ApiData<MessageRespData> sendMessage(String messageType, Long userId, Long groupId, String message, boolean escape){
         Map map = new HashMap();
         map.put("message_type", messageType);
         map.put("user_id",userId);
         map.put("group_id",groupId);
         map.put("message",message);
         map.put("auto_escape",escape);
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.SEND_GROUP_MSG,map)));
+        return ApiSender.sendApiJson(Api.SEND_MSG,map).to(new TypeReference<ApiData<MessageRespData>>() {
+        });
     }
 
     /**
@@ -74,27 +75,28 @@ public class Bot {
     public static void deleteMessage(Long messageId){
         Map map = new HashMap();
         map.put("message_id", messageId);
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.DELETE_MSG,map)));
+        ApiSender.sendApiJson(Api.DELETE_MSG,map);
     }
 
     /**
      * 获取消息
      * param messageId 消息id
      */
-    public static void getMessage(Long messageId){
+    public static ApiData<MessageData> getMessage(Long messageId){
         Map map = new HashMap();
         map.put("message_id", messageId);
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.GET_MSG,map)));
+        return ApiSender.sendApiJson(Api.GET_MSG,map).to(new TypeReference<ApiData<MessageData>>() {
+        });
     }
 
     /**
      * 获取合并转发消息
      * param messageId 消息id
      */
-    public static void getForwardMessage(Long messageId){
+    public static String getForwardMessage(String id){
         Map map = new HashMap();
-        map.put("message_id", messageId);
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.GET_FORWARD_MSG,map)));
+        map.put("id", id);
+        return ApiSender.sendApiJson(Api.GET_FORWARD_MSG,map).toJavaObject(String.class);
     }
 
     /**
@@ -106,7 +108,7 @@ public class Bot {
         Map map = new HashMap();
         map.put("user_id", userId);
         map.put("times", times);
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.SEND_LIKE,map)));
+        ApiSender.sendApiJson(Api.SEND_LIKE,map);
     }
 
     /**
@@ -120,7 +122,7 @@ public class Bot {
         map.put("group_id", groupId);
         map.put("user_id", userId);
         map.put("reject_add_request", rejectAddRequest);
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.SET_GROUP_KICK,map)));
+        ApiSender.sendApiJson(Api.SET_GROUP_KICK,map);
     }
 
     /**
@@ -134,7 +136,7 @@ public class Bot {
         map.put("group_id", groupId);
         map.put("user_id", userId);
         map.put("duration", duration);
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.SET_GROUP_BAN,map)));
+        ApiSender.sendApiJson(Api.SET_GROUP_BAN,map);
     }
 
     /**
@@ -150,7 +152,7 @@ public class Bot {
         map.put("anonymous", anonymous);
         map.put("anonymous_flag", anonymousFlag);
         map.put("duration", duration);
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.SET_GROUP_ANONYMOUS_BAN,map)));
+        ApiSender.sendApiJson(Api.SET_GROUP_ANONYMOUS_BAN,map);
     }
 
     /**
@@ -162,7 +164,7 @@ public class Bot {
         Map map = new HashMap();
         map.put("group_id", groupId);
         map.put("enable", enable);
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.SET_GROUP_WHOLE_BAN,map)));
+        ApiSender.sendApiJson(Api.SET_GROUP_WHOLE_BAN,map);
     }
 
     /**
@@ -176,7 +178,7 @@ public class Bot {
         map.put("group_id", groupId);
         map.put("user_id", userId);
         map.put("enable", enable);
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.SET_GROUP_ADMIN,map)));
+        ApiSender.sendApiJson(Api.SET_GROUP_ADMIN,map);
     }
 
     /**
@@ -188,7 +190,7 @@ public class Bot {
         Map map = new HashMap();
         map.put("group_id", groupId);
         map.put("enable", enable);
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.SET_GROUP_ANONYMOUS,map)));
+        ApiSender.sendApiJson(Api.SET_GROUP_ANONYMOUS,map);
     }
 
     /**
@@ -202,7 +204,7 @@ public class Bot {
         map.put("group_id", groupId);
         map.put("user_id", userId);
         map.put("card", card);
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.SET_GROUP_CARD,map)));
+        ApiSender.sendApiJson(Api.SET_GROUP_CARD,map);
     }
 
     /**
@@ -214,7 +216,7 @@ public class Bot {
         Map map = new HashMap();
         map.put("group_id", groupId);
         map.put("group_name", groupName);
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.SET_GROUP_NAME,map)));
+        ApiSender.sendApiJson(Api.SET_GROUP_NAME,map);
     }
 
     /**
@@ -226,7 +228,7 @@ public class Bot {
         Map map = new HashMap();
         map.put("group_id", groupId);
         map.put("is_dismiss", isDismiss);
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.SET_GROUP_LEAVE,map)));
+        ApiSender.sendApiJson(Api.SET_GROUP_LEAVE,map);
     }
 
     /**
@@ -242,7 +244,7 @@ public class Bot {
         map.put("user_id", userId);
         map.put("special_title", specialTitle);
         map.put("duration", duration);
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.SET_GROUP_SPECIAL_TITLE,map)));
+        ApiSender.sendApiJson(Api.SET_GROUP_SPECIAL_TITLE,map);
     }
 
     /**
@@ -256,7 +258,7 @@ public class Bot {
         map.put("flag", flag);
         map.put("approve", approve);
         map.put("remark", remark);
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.SET_FRIEND_ADD_REQUEST,map)));
+        ApiSender.sendApiJson(Api.SET_FRIEND_ADD_REQUEST,map);
     }
 
     /**
@@ -272,14 +274,15 @@ public class Bot {
         map.put("sub_type", subType);
         map.put("approve", approve);
         map.put("reason", reason);
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.SET_GROUP_ADD_REQUEST,map)));
+        ApiSender.sendApiJson(Api.SET_GROUP_ADD_REQUEST,map);
     }
 
     /**
      * 获取登录号信息
      */
-    public static void getLoginInfo(){
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.GET_LOGIN_INFO,null)));
+    public static ApiData<LoginInfoData> getLoginInfo(){
+        return ApiSender.sendApiJson(Api.GET_LOGIN_INFO,null).to(new TypeReference<ApiData<LoginInfoData>>() {
+        });
     }
 
     /**
@@ -287,18 +290,20 @@ public class Bot {
      * param userId QQ号
      * param noCache 是否不使用缓存（使用缓存可能更新不及时，但响应更快） 默认值false
      */
-    public static void getStrangerInfo(Long userId, boolean noCache){
+    public static ApiData<StrangerData> getStrangerInfo(Long userId, boolean noCache){
         Map map = new HashMap();
         map.put("user_id", userId);
         map.put("no_cache", noCache);
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.GET_STRANGER_INFO,map)));
+        return ApiSender.sendApiJson(Api.GET_STRANGER_INFO,map).to(new TypeReference<ApiData<StrangerData>>() {
+        });
     }
 
     /**
      * 获取好友列表
      */
-    public static void getFriendList(){
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.GET_FRIEND_LIST,null)));
+    public static ApiData<List<FriendInfoData>> getFriendList(){
+        return ApiSender.sendApiJson(Api.GET_FRIEND_LIST,null).to(new TypeReference<ApiData<List<FriendInfoData>>>() {
+        });
     }
 
     /**
@@ -306,18 +311,20 @@ public class Bot {
      * param groupId 群号
      * param noCache 是否不使用缓存（使用缓存可能更新不及时，但响应更快） 默认值false
      */
-    public static void getGroupInfo(Long groupId, boolean noCache){
+    public static ApiData<GroupInfoData> getGroupInfo(Long groupId, boolean noCache){
         Map map = new HashMap();
         map.put("group_id", groupId);
         map.put("no_cache", noCache);
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.GET_GROUP_INFO,map)));
+        return ApiSender.sendApiJson(Api.GET_GROUP_INFO,map).to(new TypeReference<ApiData<GroupInfoData>>() {
+        });
     }
 
     /**
      * 获取群列表
      */
-    public static void getGroupList(){
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.GET_GROUP_List,null)));
+    public static ApiData<List<GroupInfoData>> getGroupList(){
+        return ApiSender.sendApiJson(Api.GET_GROUP_List,null).to(new TypeReference<ApiData<List<GroupInfoData>>>() {
+        });
     }
 
     /**
@@ -326,22 +333,24 @@ public class Bot {
      * param userId QQ号
      * param noCache 是否不使用缓存（使用缓存可能更新不及时，但响应更快） 默认值false
      */
-    public static void getGroupMemberInfo(Long groupId, Long userId, boolean noCache){
+    public static ApiData<GroupMemberInfoData> getGroupMemberInfo(Long groupId, Long userId, boolean noCache){
         Map map = new HashMap();
         map.put("group_id", groupId);
         map.put("user_id", userId);
         map.put("no_cache", noCache);
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.GET_GROUP_MEMBER_INFO,map)));
+        return ApiSender.sendApiJson(Api.GET_GROUP_MEMBER_INFO,map).to(new TypeReference<ApiData<GroupMemberInfoData>>() {
+        });
     }
 
     /**
      * 获取群成员列表
      * param groupId 群号
      */
-    public static void getGroupMemberList(Long groupId){
+    public static ApiData<List<GroupMemberInfoData>> getGroupMemberList(Long groupId){
         Map map = new HashMap();
         map.put("group_id", groupId);
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.GET_GROUP_MEMBER_LIST,map)));
+        return ApiSender.sendApiJson(Api.GET_GROUP_MEMBER_LIST,map).to(new TypeReference<ApiData<List<GroupMemberInfoData>>>() {
+        });
     }
 
     /**
@@ -349,38 +358,42 @@ public class Bot {
      * param groupId 群号
      * param type 要获取的群荣誉类型，可传入talkative、performer、legend、strong_newbie、emotion以分别获取单个类型的群荣誉数据，或传入 all获取所有数据
      */
-    public static void getGroupHonorInfo(Long groupId, String type){
+    public static ApiData<GroupHonorData> getGroupHonorInfo(Long groupId, String type){
         Map map = new HashMap();
         map.put("group_id", groupId);
         map.put("type", type);
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.GET_GROUP_HONOR_INFO,map)));
+        return ApiSender.sendApiJson(Api.GET_GROUP_HONOR_INFO,map).to(new TypeReference<ApiData<GroupHonorData>>() {
+        });
     }
 
     /**
      * 获取 Cookies
      * param domain 需要获取cookies的域名
      */
-    public static void getCookies(String domain){
+    public static ApiData<CookiesData> getCookies(String domain){
         Map map = new HashMap();
         map.put("domain", domain);
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.GET_COOKIES,map)));
+        return ApiSender.sendApiJson(Api.GET_COOKIES,map).to(new TypeReference<ApiData<CookiesData>>() {
+        });
     }
 
     /**
      * 获取CSRF Token
      */
-    public static void getCsrfToken(){
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.GET_CSRF_TOKEN,null)));
+    public static ApiData<CSRFTokenData> getCsrfToken(){
+        return ApiSender.sendApiJson(Api.GET_CSRF_TOKEN,null).to(new TypeReference<ApiData<CSRFTokenData>>() {
+        });
     }
 
     /**
      * 获取QQ相关接口凭证
      * param domain 需要获取cookies的域名
      */
-    public static void getCredentials(String domain){
+    public static ApiData<CredentialsData> getCredentials(String domain){
         Map map = new HashMap();
         map.put("domain", domain);
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.GET_CREDENTIALS,map)));
+        return ApiSender.sendApiJson(Api.GET_CREDENTIALS,map).to(new TypeReference<ApiData<CredentialsData>>() {
+        });
     }
 
     /**
@@ -388,49 +401,55 @@ public class Bot {
      * param file 收到的语音文件名（消息段的file参数），如0B38145AA44505000B38145AA4450500.silk
      * param outFormat 转换到的格式，目前支持mp3、amr、wma、m4a、spx、ogg、wav、flac
      */
-    public static void getRecord(String file, String outFormat){
+    public static ApiData<FileData> getRecord(String file, String outFormat){
         Map map = new HashMap();
         map.put("file", file);
         map.put("out_format", outFormat);
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.GET_RECORD,map)));
+        return ApiSender.sendApiJson(Api.GET_RECORD,map).to(new TypeReference<ApiData<FileData>>() {
+        });
     }
 
     /**
      * 获取图片
      * param file 收到的图片文件名（消息段的file参数），如6B4DE3DFD1BD271E3297859D41C530F5.jpg
      */
-    public static void getImage(String file){
+    public static ApiData<FileData> getImage(String file){
         Map map = new HashMap();
         map.put("file", file);
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.GET_IMAGE,map)));
+        return ApiSender.sendApiJson(Api.GET_IMAGE,map).to(new TypeReference<ApiData<FileData>>() {
+        });
     }
 
     /**
      * 检查是否可以发送图片
      */
-    public static void canSendImage(){
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.CAN_SEND_IMAGE,null)));
+    public static ApiData<ConformData> canSendImage(){
+        return ApiSender.sendApiJson(Api.CAN_SEND_IMAGE,null).to(new TypeReference<ApiData<ConformData>>() {
+        });
     }
 
     /**
      * 检查是否可以发送语音
      */
-    public static void canSendRecord(){
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.CAN_SEND_RECORD,null)));
+    public static ApiData<ConformData> canSendRecord(){
+        return ApiSender.sendApiJson(Api.CAN_SEND_RECORD,null).to(new TypeReference<ApiData<ConformData>>() {
+        });
     }
 
     /**
      * 获取运行状态
      */
-    public static void getStatus(){
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.GET_STATUS,null)));
+    public static ApiData<StatusData> getStatus(){
+        return ApiSender.sendApiJson(Api.GET_STATUS,null).to(new TypeReference<ApiData<StatusData>>() {
+        });
     }
 
     /**
      * 获取版本信息
      */
-    public static void getVersionInfo(){
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.GET_VERSION_INFO,null)));
+    public static ApiData<VersionInfoData> getVersionInfo(){
+        return ApiSender.sendApiJson(Api.GET_VERSION_INFO,null).to(new TypeReference<ApiData<VersionInfoData>>() {
+        });
     }
 
     /**
@@ -440,14 +459,14 @@ public class Bot {
     public static void setRestart(Integer delay){
         Map map = new HashMap();
         map.put("delay", delay);
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.SET_RESTART,map)));
+        ApiSender.sendApiJson(Api.SET_RESTART,map);
     }
 
     /**
      * 清理缓存
      */
     public static void cleanCache(){
-        socketServer.broadcast(JSON.toJSONString(getApiResult(Api.CLEAN_CACHE,null)));
+        ApiSender.sendApiJson(Api.CLEAN_CACHE,null);
     }
 
     /**
