@@ -20,7 +20,7 @@ maven
 <dependency>
    <groupId>io.gitee.soulgoodmans</groupId>
    <artifactId>LagrangeMCPlugin</artifactId>
-   <version>0.0.3</version>
+   <version>0.0.4</version>
 </dependency>
 ~~~
 
@@ -30,7 +30,7 @@ gradle
 
 ~~~gradle
 dependencies {
-    implementation 'io.gitee.soulgoodmans:LagrangeMCPlugin:0.0.3'
+    implementation 'io.gitee.soulgoodmans:LagrangeMCPlugin:0.0.4'
 }
 ~~~
 
@@ -183,6 +183,4 @@ public class PlayerJoinListener implements Listener {
 
 代码大量参考于 https://gitee.com/changwenpeng/svipbot
 
-本框架用三天半事件开发完，目前为测试版本，部分bug未排查到，如果遇到请提交到issure中。
-
-发送消息时会有jsonObject为null时无法使用方法的异常，不用担心，再次请求就行了，后续会修改。
+目前为测试版本，部分bug未排查到，如果遇到请提交到issure中。
