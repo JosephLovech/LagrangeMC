@@ -135,7 +135,7 @@ public class MessagePlugin extends BotPlugin {
     }
 
     /**
-     * 接收私聊消息
+     * 接收群消息
      * @param event 事件内容
      * @return
      */
