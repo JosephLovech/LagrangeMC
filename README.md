@@ -12,6 +12,10 @@ go-cqhttp的javaWebsocket框架 https://gitee.com/changwenpeng/svipbot
 
 
 
+推荐使用Lagrange.Core机器人核心或支持onebot11协议的机器人核心
+
+选择反向websocket
+
 #### 框架引用
 
 maven
