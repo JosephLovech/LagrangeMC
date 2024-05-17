@@ -41,7 +41,6 @@ public class SocketServer extends WebSocketServer {
      */
     @Override
     public void onOpen(WebSocket conn, ClientHandshake handshake) {
-
     }
 
     /**

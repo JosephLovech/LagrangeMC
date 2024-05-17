@@ -6,7 +6,6 @@ import io.gitee.busilaoni.lagrangemcplugin.Data.DataEntity.*;
 import io.gitee.busilaoni.lagrangemcplugin.Entity.Anonymous;
 import io.gitee.busilaoni.lagrangemcplugin.Enums.Api;
 import io.gitee.busilaoni.lagrangemcplugin.Handler.ApiHandler;
-import io.gitee.busilaoni.lagrangemcplugin.Handler.ApiSender;
 import io.gitee.busilaoni.lagrangemcplugin.Result.ApiResult;
 
 import java.util.HashMap;

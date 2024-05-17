@@ -179,6 +179,28 @@ public class PlayerJoinListener implements Listener {
 
 
 
+或者也可以在命令中使用
+
+~~~java
+public class SendMsgCommand implements CommandExecutor {
+
+    /**
+     * 发送命令
+     */
+    @Override
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        
+        //也可以使用CQMsg发送CQ码
+        Bukkit.getLogger().info(Bot.sendGroupMessage(100399726L,args[0],false).toString());
+        return true;
+    }
+}
+~~~
+
+
+
+
+
 #### 关于
 
 代码大量参考于 https://gitee.com/changwenpeng/svipbot
