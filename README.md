@@ -24,7 +24,7 @@ maven
 <dependency>
    <groupId>io.gitee.soulgoodmans</groupId>
    <artifactId>LagrangeMCPlugin</artifactId>
-   <version>0.0.4</version>
+   <version>0.0.5</version>
 </dependency>
 ~~~
 
@@ -34,7 +34,7 @@ gradle
 
 ~~~gradle
 dependencies {
-    implementation 'io.gitee.soulgoodmans:LagrangeMCPlugin:0.0.4'
+    implementation 'io.gitee.soulgoodmans:LagrangeMCPlugin:0.0.5'
 }
 ~~~
 
