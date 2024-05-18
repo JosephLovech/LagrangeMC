@@ -1,6 +1,7 @@
 package io.gitee.busilaoni.lagrangemcplugin.Handler;
 
 import com.alibaba.fastjson2.JSONObject;
+import io.gitee.busilaoni.lagrangemcplugin.Bot.Bot;
 import io.gitee.busilaoni.lagrangemcplugin.Bot.BotPlugin;
 import io.gitee.busilaoni.lagrangemcplugin.Event.Message.GroupMessageEvent;
 import io.gitee.busilaoni.lagrangemcplugin.Event.Message.PrivateMessageEvent;
@@ -22,7 +23,7 @@ public class EventHandler {
      * 处理事件
      * param jsonObject 事件JSON对象
      */
-    public void handler(JSONObject jsonObject){
+    public void handler(Bot bot, JSONObject jsonObject){
         //获取postType类型
         String postType = jsonObject.getString("post_type");
 
@@ -36,22 +37,22 @@ public class EventHandler {
         switch (postType) {
             // 如果是消息事件，则调用 handleMessage 方法处理
             case "message":
-                handleMessage(jsonObject);
+                handleMessage(bot, jsonObject);
             break;
 
             // 如果是元事件，则调用 handleMeta 方法处理
             case "meta_event":
-                handleMeta(jsonObject);
+                handleMeta(bot, jsonObject);
             break;
 
             // 如果是通知事件，则调用 handleNotice 方法处理
             case "notice":
-                handleNotice(jsonObject);
+                handleNotice(bot, jsonObject);
             break;
 
             // 如果是请求事件，则调用 handleRequest 方法处理
             case "request":
-                handleRequest(jsonObject);
+                handleRequest(bot, jsonObject);
             break;
 
             // 未知事件类型
@@ -65,7 +66,7 @@ public class EventHandler {
      * 处理接受到的消息
      * param jsonObject
      */
-    private void handleMessage(JSONObject jsonObject){
+    private void handleMessage(Bot bot, JSONObject jsonObject){
 
         //获取messageType类型
         String messageType = jsonObject.getString("message_type");
@@ -79,7 +80,7 @@ public class EventHandler {
                 //消息转换对应类型
                 PrivateMessageEvent privateMessageEvent = jsonObject.toJavaObject(PrivateMessageEvent.class);
                 //转发执行
-                handlePluginMessages(botPlugin -> botPlugin.onPrivateMessage(privateMessageEvent));
+                handlePluginMessages(botPlugin -> botPlugin.onPrivateMessage(bot, privateMessageEvent));
             break;
 
             /**
@@ -90,7 +91,7 @@ public class EventHandler {
                 //消息转换对应类型
                 GroupMessageEvent groupMessageEvent = jsonObject.toJavaObject(GroupMessageEvent.class);
                 //转发执行
-                handlePluginMessages(botPlugin -> botPlugin.onGroupMessage(groupMessageEvent));
+                handlePluginMessages(botPlugin -> botPlugin.onGroupMessage(bot, groupMessageEvent));
             break;
 
             /**
@@ -106,7 +107,7 @@ public class EventHandler {
      * 处理接受到的元事件
      * param jsonObject
      */
-    private void handleMeta(JSONObject jsonObject){
+    private void handleMeta(Bot bot, JSONObject jsonObject){
 
         //获取metaEventType类型
         String metaEventType = jsonObject.getString("meta_event_type");
@@ -120,7 +121,7 @@ public class EventHandler {
                 //消息转换对应类型
                 LifecycleMetaEvent lifecycleMetaEvent = jsonObject.toJavaObject(LifecycleMetaEvent.class);
                 //转发执行
-                handlePluginMessages(botPlugin -> botPlugin.onLifecycleMeta(lifecycleMetaEvent));
+                handlePluginMessages(botPlugin -> botPlugin.onLifecycleMeta(bot, lifecycleMetaEvent));
             break;
 
             /**
@@ -131,7 +132,7 @@ public class EventHandler {
                 //消息转换对应类型
                 HeartbeatMetaEvent heartbeatMetaEvent = jsonObject.toJavaObject(HeartbeatMetaEvent.class);
                 //转发执行
-                handlePluginMessages(botPlugin -> botPlugin.onHeartbeatMeta(heartbeatMetaEvent));
+                handlePluginMessages(botPlugin -> botPlugin.onHeartbeatMeta(bot, heartbeatMetaEvent));
             break;
 
             /**
@@ -148,7 +149,7 @@ public class EventHandler {
      * 处理接受到的通知
      * param jsonObject
      */
-    private void handleNotice(JSONObject jsonObject){
+    private void handleNotice(Bot bot, JSONObject jsonObject){
 
         //获取messageType类型
         String noticeType = jsonObject.getString("notice_type");
@@ -162,7 +163,7 @@ public class EventHandler {
                 //消息转换对应类型
                 GroupFileUploadNoticeEvent groupFileUploadNoticeEvent = jsonObject.toJavaObject(GroupFileUploadNoticeEvent.class);
                 //转发执行
-                handlePluginMessages(botPlugin -> botPlugin.onGroupFileUpload(groupFileUploadNoticeEvent));
+                handlePluginMessages(botPlugin -> botPlugin.onGroupFileUpload(bot, groupFileUploadNoticeEvent));
             break;
 
             /**
@@ -173,7 +174,7 @@ public class EventHandler {
                 //消息转换对应类型
                 GroupAdminChangeNoticeEvent groupAdminChangeNoticeEvent = jsonObject.toJavaObject(GroupAdminChangeNoticeEvent.class);
                 //转发执行
-                handlePluginMessages(botPlugin -> botPlugin.onGroupAdminChange(groupAdminChangeNoticeEvent));
+                handlePluginMessages(botPlugin -> botPlugin.onGroupAdminChange(bot, groupAdminChangeNoticeEvent));
             break;
 
             /**
@@ -184,7 +185,7 @@ public class EventHandler {
                 //消息转换对应类型
                 GroupDecreaseNoticeEvent groupDecreaseNoticeEvent = jsonObject.toJavaObject(GroupDecreaseNoticeEvent.class);
                 //转发执行
-                handlePluginMessages(botPlugin -> botPlugin.onGroupDecrease(groupDecreaseNoticeEvent));
+                handlePluginMessages(botPlugin -> botPlugin.onGroupDecrease(bot, groupDecreaseNoticeEvent));
             break;
 
             /**
@@ -195,7 +196,7 @@ public class EventHandler {
                 //消息转换对应类型
                 GroupIncreaseNoticeEvent groupIncreaseNoticeEvent = jsonObject.toJavaObject(GroupIncreaseNoticeEvent.class);
                 //转发执行
-                handlePluginMessages(botPlugin -> botPlugin.onGroupIncrease(groupIncreaseNoticeEvent));
+                handlePluginMessages(botPlugin -> botPlugin.onGroupIncrease(bot, groupIncreaseNoticeEvent));
             break;
 
             /**
@@ -206,7 +207,7 @@ public class EventHandler {
                 //消息转换对应类型
                 GroupBanNoticeEvent groupBanNoticeEvent = jsonObject.toJavaObject(GroupBanNoticeEvent.class);
                 //转发执行
-                handlePluginMessages(botPlugin -> botPlugin.onGroupBan(groupBanNoticeEvent));
+                handlePluginMessages(botPlugin -> botPlugin.onGroupBan(bot, groupBanNoticeEvent));
             break;
 
             /**
@@ -217,7 +218,7 @@ public class EventHandler {
                 //消息转换对应类型
                 FriendAddNoticeEvent friendAddNoticeEvent = jsonObject.toJavaObject(FriendAddNoticeEvent.class);
                 //转发执行
-                handlePluginMessages(botPlugin -> botPlugin.onFriendAdd(friendAddNoticeEvent));
+                handlePluginMessages(botPlugin -> botPlugin.onFriendAdd(bot, friendAddNoticeEvent));
             break;
 
 
@@ -229,7 +230,7 @@ public class EventHandler {
                 //消息转换对应类型
                 GroupRecallNoticeEvent groupRecallNoticeEvent = jsonObject.toJavaObject(GroupRecallNoticeEvent.class);
                 //转发执行
-                handlePluginMessages(botPlugin -> botPlugin.onGroupRecall(groupRecallNoticeEvent));
+                handlePluginMessages(botPlugin -> botPlugin.onGroupRecall(bot, groupRecallNoticeEvent));
             break;
 
             /**
@@ -240,7 +241,7 @@ public class EventHandler {
                 //消息转换对应类型
                 FriendRecallNoticeEvent friendRecallNoticeEvent = jsonObject.toJavaObject(FriendRecallNoticeEvent.class);
                 //转发执行
-                handlePluginMessages(botPlugin -> botPlugin.onFriendRecall(friendRecallNoticeEvent));
+                handlePluginMessages(botPlugin -> botPlugin.onFriendRecall(bot, friendRecallNoticeEvent));
             break;
 
             /**
@@ -260,7 +261,7 @@ public class EventHandler {
                         //消息转换对应类型
                         GroupPokeNoticeEvent groupPokeNoticeEvent = jsonObject.toJavaObject(GroupPokeNoticeEvent.class);
                         //转发执行
-                        handlePluginMessages(botPlugin -> botPlugin.onGroupPoke(groupPokeNoticeEvent));
+                        handlePluginMessages(botPlugin -> botPlugin.onGroupPoke(bot, groupPokeNoticeEvent));
                     break;
 
                     /**
@@ -270,7 +271,7 @@ public class EventHandler {
                         //消息转换对应类型
                         GroupLuckyKingNoticeEvent groupLuckyKingNoticeEvent = jsonObject.toJavaObject(GroupLuckyKingNoticeEvent.class);
                         //转发执行
-                        handlePluginMessages(botPlugin -> botPlugin.onGroupLuckKing(groupLuckyKingNoticeEvent));
+                        handlePluginMessages(botPlugin -> botPlugin.onGroupLuckKing(bot, groupLuckyKingNoticeEvent));
                     break;
 
                     /**
@@ -280,7 +281,7 @@ public class EventHandler {
                         //消息转换对应类型
                         GroupHonorChangeNoticeEvent groupHonorChangeNoticeEvent = jsonObject.toJavaObject(GroupHonorChangeNoticeEvent.class);
                         //转发执行
-                        handlePluginMessages(botPlugin -> botPlugin.onGroupHonorChange(groupHonorChangeNoticeEvent));
+                        handlePluginMessages(botPlugin -> botPlugin.onGroupHonorChange(bot, groupHonorChangeNoticeEvent));
                     break;
 
                     /**
@@ -305,7 +306,7 @@ public class EventHandler {
      * 处理接受到的请求
      * param jsonObject
      */
-    private void handleRequest(JSONObject jsonObject){
+    private void handleRequest(Bot bot, JSONObject jsonObject){
 
         //获取messageType类型
         String requestType = jsonObject.getString("request_type");
@@ -319,7 +320,7 @@ public class EventHandler {
                 //消息转换对应类型
                 FriendRequestEvent friendRequestEvent = jsonObject.toJavaObject(FriendRequestEvent.class);
                 //转发执行
-                handlePluginMessages(botPlugin -> botPlugin.onFriendRequest(friendRequestEvent));
+                handlePluginMessages(botPlugin -> botPlugin.onFriendRequest(bot, friendRequestEvent));
             break;
 
             /**
@@ -329,7 +330,7 @@ public class EventHandler {
                 //消息转换对应类型
                 GroupRequestEvent groupRequestEvent = jsonObject.toJavaObject(GroupRequestEvent.class);
                 //转发执行
-                handlePluginMessages(botPlugin -> botPlugin.onGroupRequest(groupRequestEvent));
+                handlePluginMessages(botPlugin -> botPlugin.onGroupRequest(bot, groupRequestEvent));
             break;
 
             /**

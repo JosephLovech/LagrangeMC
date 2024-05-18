@@ -4,7 +4,7 @@ import com.alibaba.fastjson2.JSONObject;
 import io.gitee.busilaoni.lagrangemcplugin.Data.ApiData;
 import io.gitee.busilaoni.lagrangemcplugin.Enums.Api;
 import io.gitee.busilaoni.lagrangemcplugin.Result.ApiResult;
-import io.gitee.busilaoni.lagrangemcplugin.SocketServer;
+import org.java_websocket.WebSocket;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -16,14 +16,9 @@ import java.util.concurrent.atomic.AtomicLong;
 public class ApiHandler {
 
     /**
-     * ServerSocket 在插件加载中设置对象
-     */
-    public static SocketServer server;
-
-    /**
      * 原子类Long作为echo
      */
-    private static final AtomicLong apiEcho = new AtomicLong();
+    private final AtomicLong apiEcho = new AtomicLong();
 
     /**
      * 线程安全的HashMap 原子类Long作为Key, ApiSender作为Value
@@ -36,7 +31,7 @@ public class ApiHandler {
      * param map 内容
      * return
      */
-    public static JSONObject sendApiJson(Api api, Map map){
+    public JSONObject sendApiJson(Api api, Map map, WebSocket socket){
 
         try {
             //构建apiResult对象
@@ -45,7 +40,7 @@ public class ApiHandler {
             //获取echo值并作为key apiSender作为value存入到hashMap中
             Long echo = result.getEcho();
 
-            ApiSender apiSender = new ApiSender(server);
+            ApiSender apiSender = new ApiSender(socket);
             apiCallbackMap.put(echo,apiSender);
 
             //发送api信息
@@ -83,7 +78,7 @@ public class ApiHandler {
      * param params
      * return
      */
-    private static ApiResult getApiResult(String action, Map params){
+    private  ApiResult getApiResult(String action, Map params){
         ApiResult result = new ApiResult();
         //封装result
         result.setAction(action);

@@ -3,7 +3,7 @@ package io.gitee.busilaoni.lagrangemcplugin.Handler;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import io.gitee.busilaoni.lagrangemcplugin.Result.ApiResult;
-import io.gitee.busilaoni.lagrangemcplugin.SocketServer;
+import org.java_websocket.WebSocket;
 
 /**
  * Api发送器
@@ -11,9 +11,9 @@ import io.gitee.busilaoni.lagrangemcplugin.SocketServer;
 public class ApiSender extends Thread{
 
     /**
-     * ServerSocket 在插件加载中设置对象
+     * 机器人对应的socket
      */
-    public  SocketServer server;
+    public WebSocket socket;
 
     /**
      * 存储 API 响应的 JSON 对象
@@ -25,8 +25,8 @@ public class ApiSender extends Thread{
      */
     private final Object lock = new Object();
 
-    public ApiSender(SocketServer server) {
-        this.server = server;
+    public ApiSender(WebSocket socket) {
+        this.socket = socket;
     }
 
     /**
@@ -38,7 +38,7 @@ public class ApiSender extends Thread{
     public  JSONObject onSendMessage(ApiResult result) throws InterruptedException {
         // 加锁同步代码块
         synchronized (lock) {
-            server.broadcast(JSON.toJSONString(result));
+            socket.send(JSON.toJSONString(result));
             lock.wait(15000L);
         }
 

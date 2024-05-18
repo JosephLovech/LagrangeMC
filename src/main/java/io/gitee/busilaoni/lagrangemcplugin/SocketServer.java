@@ -1,6 +1,8 @@
 package io.gitee.busilaoni.lagrangemcplugin;
 
+import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
+import io.gitee.busilaoni.lagrangemcplugin.Bot.BotContainer;
 import io.gitee.busilaoni.lagrangemcplugin.Handler.ApiHandler;
 import io.gitee.busilaoni.lagrangemcplugin.Handler.EventHandler;
 import lombok.Data;
@@ -41,6 +43,12 @@ public class SocketServer extends WebSocketServer {
      */
     @Override
     public void onOpen(WebSocket conn, ClientHandshake handshake) {
+
+        //获取机器人QQ号
+        Long botId = Long.valueOf(handshake.getFieldValue("X-Self-ID"));
+        System.out.println(String.format("添加QQ: {}",botId));
+
+        BotContainer.createBot(botId,conn);
     }
 
     /**
@@ -52,7 +60,9 @@ public class SocketServer extends WebSocketServer {
      */
     @Override
     public void onClose(WebSocket conn, int code, String reason, boolean remote) {
-
+        System.out.println(String.format("onClose conn: {}", JSON.toJSONString(code)));
+        System.out.println(String.format("reason: {}",reason));
+        System.out.println(String.format("remote: {}",reason));
     }
 
     /**
@@ -73,7 +83,8 @@ public class SocketServer extends WebSocketServer {
         }
 
         //将事件处理任务提交到线程池中执行
-        executor.execute(()->{eventHandler.handler(jsonObject);});
+        Long botId = jsonObject.getLong("self_id");
+        executor.execute(()->{eventHandler.handler(BotContainer.getBot(botId), jsonObject);});
     }
 
     /**

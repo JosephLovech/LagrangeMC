@@ -14,6 +14,8 @@ go-cqhttp的javaWebsocket框架 https://gitee.com/changwenpeng/svipbot
 
 推荐使用Lagrange.Core机器人核心或支持onebot11协议的机器人核心
 
+0.0.6支持多个机器人
+
 选择反向websocket
 
 #### 框架引用
@@ -24,7 +26,7 @@ maven
 <dependency>
    <groupId>io.gitee.soulgoodmans</groupId>
    <artifactId>LagrangeMCPlugin</artifactId>
-   <version>0.0.5</version>
+   <version>0.0.6</version>
 </dependency>
 ~~~
 
@@ -34,7 +36,7 @@ gradle
 
 ~~~gradle
 dependencies {
-    implementation 'io.gitee.soulgoodmans:LagrangeMCPlugin:0.0.5'
+    implementation 'io.gitee.soulgoodmans:LagrangeMCPlugin:0.0.6'
 }
 ~~~
 
@@ -91,7 +93,6 @@ public final class LagrangeMCExample extends JavaPlugin {
         //配置websocket
         server = new SocketServer(yamlConfig.getInt("websocket.port"));
         server.start();
-        ApiSender.server = server;
 
         //配置Rcon 如果不需要可以不用添加
         rconClient = new RconClient(
@@ -127,14 +128,14 @@ public class MessagePlugin extends BotPlugin {
      * @return
      */
     @Override
-    public int onPrivateMessage(PrivateMessageEvent event) {
+    public int onPrivateMessage(Bot bot, PrivateMessageEvent event) {
 
         //构建信息
         CQMsg msg = new CQMsg();
         msg.Text("你好").QQFace(14);
 
         //机器人发送信息
-        Bot.sendPrivateMessage(event.getUserId(), msg.toString(), false);
+        bot.sendPrivateMessage(event.getUserId(),msg.toString(),false);
         return NotMatch;
     }
 
@@ -144,14 +145,14 @@ public class MessagePlugin extends BotPlugin {
      * @return
      */
     @Override
-    public int onGroupMessage(GroupMessageEvent event) {
+    public int onGroupMessage(Bot bot, GroupMessageEvent event) {
 
         //构建信息
         CQMsg msg = new CQMsg();
         msg.Text("你好").QQFace(14);
 
         //机器人发送群信息
-        Bot.sendGroupMessage(event.getGroupId(),msg.toString(),false);
+        bot.sendGroupMessage(event.getGroupId(),msg.toString(),false);
         return NotMatch;
     }
 }
@@ -175,8 +176,8 @@ public class PlayerJoinListener implements Listener {
         CQMsg msg = new CQMsg();
         msg.Text(String.format("%s 加入游戏", event.getPlayer().getName()));
         
-        //发送信息
-        Bot.sendGroupMessage(114514L,msg.toString(),false);
+        //通过qq号从容器中获取机器人
+        BotContainer.getBot(1008611L).sendGroupMessage(10010L,msg.toString(),false);
     }
 }
 ~~~
@@ -194,8 +195,12 @@ public class SendMsgCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         
-        //也可以使用CQMsg发送CQ码
-        Bukkit.getLogger().info(Bot.sendGroupMessage(100399726L,args[0],false).toString());
+        //构建信息
+        CQMsg msg = new CQMsg();
+        msg.Text(args[0]);
+        
+        //通过qq号从容器中获取机器人
+        BotContainer.getBot(1008611L).sendGroupMessage(10010L,msg.toString(),false);
         return true;
     }
 }
