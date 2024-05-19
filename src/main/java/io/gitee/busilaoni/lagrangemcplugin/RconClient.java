@@ -2,7 +2,6 @@ package io.gitee.busilaoni.lagrangemcplugin;
 
 import lombok.Data;
 import nl.vv32.rcon.Rcon;
-import org.bukkit.Bukkit;
 
 import java.io.IOException;
 
@@ -58,10 +57,10 @@ public class RconClient {
             rcon = Rcon.open(host,port);
 
             if (rcon.authenticate(password)){
-                Bukkit.getLogger().info("rcon成功连接");
+                System.out.println("rcon成功连接");
                 isOpen = true;
             }else {
-                Bukkit.getLogger().info("rcon连接失败");
+                System.out.println("rcon连接失败");
             }
         } catch (IOException e) {
             e.printStackTrace();

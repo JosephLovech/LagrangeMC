@@ -1,6 +1,5 @@
 package io.gitee.busilaoni.lagrangemcplugin;
 
-import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import io.gitee.busilaoni.lagrangemcplugin.Bot.BotContainer;
 import io.gitee.busilaoni.lagrangemcplugin.Handler.ApiHandler;
@@ -46,7 +45,7 @@ public class SocketServer extends WebSocketServer {
 
         //获取机器人QQ号
         Long botId = Long.valueOf(handshake.getFieldValue("X-Self-ID"));
-        System.out.println(String.format("添加QQ: {}",botId));
+        System.out.println(String.format("[info]: 添加QQ: %d",botId));
 
         BotContainer.createBot(botId,conn);
     }
@@ -60,9 +59,8 @@ public class SocketServer extends WebSocketServer {
      */
     @Override
     public void onClose(WebSocket conn, int code, String reason, boolean remote) {
-        System.out.println(String.format("onClose conn: {}", JSON.toJSONString(code)));
-        System.out.println(String.format("reason: {}",reason));
-        System.out.println(String.format("remote: {}",reason));
+
+        System.out.println(String.format("[warning]: 有机器人连接断开"));
     }
 
     /**

@@ -10,7 +10,6 @@ import io.gitee.busilaoni.lagrangemcplugin.Event.Meta.LifecycleMetaEvent;
 import io.gitee.busilaoni.lagrangemcplugin.Event.Notice.*;
 import io.gitee.busilaoni.lagrangemcplugin.Event.Request.FriendRequestEvent;
 import io.gitee.busilaoni.lagrangemcplugin.Event.Request.GroupRequestEvent;
-import org.bukkit.Bukkit;
 
 import java.util.function.Function;
 
@@ -29,7 +28,7 @@ public class EventHandler {
 
         //postType参数为null时
         if (postType == null){
-            Bukkit.getLogger().warning(String.format("postType is null: %s",jsonObject.toString()));
+            System.out.println(String.format("[warning]: postType is null: %s",jsonObject.toString()));
             return;
         }
 
@@ -57,7 +56,7 @@ public class EventHandler {
 
             // 未知事件类型
             default:
-                Bukkit.getLogger().warning(String.format("Unknown post_type: %s",jsonObject.toString()));
+                System.out.println(String.format("[warning]: Unknown post_type: %s",jsonObject.toString()));
             break;
         }
     }
@@ -98,7 +97,7 @@ public class EventHandler {
              * 其他消息
              */
             default:
-                Bukkit.getLogger().warning(String.format("Unknown message_type: %s",jsonObject.toString()));
+                System.out.println(String.format("[warning]: Unknown message_type: %s",jsonObject.toString()));
             break;
         }
     }
@@ -139,7 +138,7 @@ public class EventHandler {
              * 其他消息
              */
             default:
-                Bukkit.getLogger().warning(String.format("Unknown meta_event_type: %s",jsonObject.toString()));
+                System.out.println(String.format("[warning]: Unknown meta_event_type: %s",jsonObject.toString()));
             break;
         }
     }
@@ -288,7 +287,7 @@ public class EventHandler {
                      * 其他消息
                      */
                     default:
-                        Bukkit.getLogger().warning(String.format("Unknown sub_type: %s",jsonObject.toString()));
+                        System.out.println(String.format("[warning]: Unknown sub_type: %s",jsonObject.toString()));
                     break;
                 }
             break;
@@ -297,8 +296,8 @@ public class EventHandler {
              * 其他消息
              */
             default:
-                Bukkit.getLogger().warning(String.format("Unknown request_type: %s",jsonObject.toString()));
-             break;
+                System.out.println(String.format("[warning]: Unknown request_type: %s",jsonObject.toString()));
+            break;
         }
     }
 
@@ -337,7 +336,7 @@ public class EventHandler {
              * 其他消息
              */
             default:
-                Bukkit.getLogger().warning(String.format("Unknown message_type: %s",jsonObject.toString()));
+                System.out.println(String.format("[warning]: Unknown message_type: %s",jsonObject.toString()));
             break;
         }
     }
@@ -373,7 +372,7 @@ public class EventHandler {
             //反射获取实例对象
             return clazz.getConstructor().newInstance();
         } catch (Exception e) {
-            Bukkit.getLogger().info(String.format("获取插件：%s出错",clazz.toString()));
+            System.out.println(String.format("[warning]: 获取插件：%s出错",clazz.toString()));
             return null;
         }
     }
