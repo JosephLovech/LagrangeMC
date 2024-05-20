@@ -18,6 +18,8 @@ go-cqhttp的javaWebsocket框架 https://gitee.com/changwenpeng/svipbot
 
 0.0.7删除框架中的paperAPI
 
+0.0.8添加定时任务
+
 
 
 开启机器人时选择反向websocket
@@ -30,7 +32,7 @@ maven
 <dependency>
    <groupId>io.gitee.soulgoodmans</groupId>
    <artifactId>LagrangeMCPlugin</artifactId>
-   <version>0.0.7</version>
+   <version>0.0.8</version>
 </dependency>
 ~~~
 
@@ -40,7 +42,7 @@ gradle
 
 ~~~gradle
 dependencies {
-    implementation 'io.gitee.soulgoodmans:LagrangeMCPlugin:0.0.7'
+    implementation 'io.gitee.soulgoodmans:LagrangeMCPlugin:0.0.8'
 }
 ~~~
 
@@ -65,8 +67,6 @@ rcon:
   #密码
   password: 114514
 ~~~
-
-
 
 
 
@@ -211,6 +211,49 @@ public class SendMsgCommand implements CommandExecutor {
 ~~~
 
 
+
+#### 使用定时任务
+
+创建定时任务类
+
+~~~java
+/**
+ * 创建定时任务类 需要实现Job接口
+ */
+public class MyJob implements Job {
+
+    private static Integer id = 1;
+
+    @Override
+    public void execute(JobExecutionContext context) throws JobExecutionException {
+        
+        //构建定时任务代码
+        Bukkit.getLogger().info("message: "+ id++);
+        
+    }
+}
+~~~
+
+
+
+开启定时任务，以下代码块内容建议放置在Listener或者Command
+
+~~~java
+//定义Job 定时任务类、任务名、组名
+JobDetail detail = MyScheduler.createJobDetail(MyJob.class, "job", "lagrangeMc");
+
+//配置执行时间 rcon表达式(请查询相关使用介绍)、是否立刻执行、任务名、组名
+Trigger trigger = MyScheduler.createCronTrigger("*/7 * * * * ?", false, "job", "lagrangeMc");
+
+//创建任务
+Scheduler scheduler = MyScheduler.createScheduler(detail,trigger);
+
+//启动定时任务
+MyScheduler.startScheduler(scheduler);
+
+//关闭定时任务
+MyScheduler.stopScheduler(scheduler);
+~~~
 
 
 
