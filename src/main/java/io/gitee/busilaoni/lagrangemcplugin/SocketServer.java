@@ -21,6 +21,9 @@ public class SocketServer extends WebSocketServer {
      */
     private EventHandler eventHandler;
 
+    /**
+     * 线程池
+     */
     private ExecutorService executor;
 
     /**

@@ -6,7 +6,7 @@
 
     <groupId>io.gitee.soulgoodmans</groupId>
     <artifactId>LagrangeMCPlugin</artifactId>
-    <version>0.0.7</version>
+    <version>0.0.8</version>
     <packaging>jar</packaging>
 
     <name>LagrangeMCPlugin</name>
@@ -179,5 +179,19 @@
             <artifactId>fastjson2</artifactId>
             <version>2.0.45</version>
         </dependency>
+
+        <!--quartz-->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>2.3.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz-jobs</artifactId>
+            <version>2.3.2</version>
+        </dependency>
+
     </dependencies>
 </project>
