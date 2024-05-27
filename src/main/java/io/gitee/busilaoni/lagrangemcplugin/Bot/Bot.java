@@ -2,6 +2,7 @@ package io.gitee.busilaoni.lagrangemcplugin.Bot;
 
 import com.alibaba.fastjson2.TypeReference;
 import io.gitee.busilaoni.lagrangemcplugin.Data.ApiData;
+import io.gitee.busilaoni.lagrangemcplugin.Data.ApiListData;
 import io.gitee.busilaoni.lagrangemcplugin.Data.DataEntity.*;
 import io.gitee.busilaoni.lagrangemcplugin.Entity.Anonymous;
 import io.gitee.busilaoni.lagrangemcplugin.Enums.Api;
@@ -10,7 +11,6 @@ import io.gitee.busilaoni.lagrangemcplugin.Result.ApiResult;
 import org.java_websocket.WebSocket;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -304,8 +304,8 @@ public class Bot extends OneBot{
     /**
      * 获取好友列表
      */
-    public  ApiData<List<FriendInfoData>> getFriendList(){
-        return super.getApiHandler().sendApiJson(Api.GET_FRIEND_LIST,null,super.getSocket()).to(new TypeReference<ApiData<List<FriendInfoData>>>() {
+    public  ApiListData<FriendInfoData> getFriendList(){
+        return super.getApiHandler().sendApiJson(Api.GET_FRIEND_LIST,null,super.getSocket()).to(new TypeReference<ApiListData<FriendInfoData>>() {
         });
     }
 
@@ -325,8 +325,8 @@ public class Bot extends OneBot{
     /**
      * 获取群列表
      */
-    public  ApiData<List<GroupInfoData>> getGroupList(){
-        return super.getApiHandler().sendApiJson(Api.GET_GROUP_List,null,super.getSocket()).to(new TypeReference<ApiData<List<GroupInfoData>>>() {
+    public  ApiListData<GroupInfoData> getGroupList(){
+        return super.getApiHandler().sendApiJson(Api.GET_GROUP_List,null,super.getSocket()).to(new TypeReference<ApiListData<GroupInfoData>>() {
         });
     }
 
@@ -349,10 +349,10 @@ public class Bot extends OneBot{
      * 获取群成员列表
      * param groupId 群号
      */
-    public  ApiData<List<GroupMemberInfoData>> getGroupMemberList(Long groupId){
+    public ApiListData<GroupMemberInfoData> getGroupMemberList(Long groupId){
         Map map = new HashMap();
         map.put("group_id", groupId);
-        return super.getApiHandler().sendApiJson(Api.GET_GROUP_MEMBER_LIST,map,super.getSocket()).to(new TypeReference<ApiData<List<GroupMemberInfoData>>>() {
+        return super.getApiHandler().sendApiJson(Api.GET_GROUP_MEMBER_LIST,map,super.getSocket()).to(new TypeReference<ApiListData<GroupMemberInfoData>>() {
         });
     }
 

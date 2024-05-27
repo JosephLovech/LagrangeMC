@@ -164,7 +164,7 @@ public class MessagePlugin extends BotPlugin {
 
 
 
-针对机器人发送信息使用静态方法 例：Bot.sendGroupMessage() ，所以可以在MC监听器中使用
+针对机器人发送信息使用静态方法，所以可以在MC监听器中使用
 
 ~~~java
 public class PlayerJoinListener implements Listener {

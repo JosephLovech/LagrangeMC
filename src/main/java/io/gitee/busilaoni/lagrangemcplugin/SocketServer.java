@@ -63,7 +63,7 @@ public class SocketServer extends WebSocketServer {
     @Override
     public void onClose(WebSocket conn, int code, String reason, boolean remote) {
 
-        System.out.println(String.format("[warning]: 有机器人连接断开"));
+        System.out.println(String.format("[warning]: 机器人连接断开"));
     }
 
     /**
