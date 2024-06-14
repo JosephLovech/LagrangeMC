@@ -5,8 +5,19 @@ package io.gitee.busilaoni.lagrangemcplugin.Enums;
  */
 public enum HonorType {
 
+    /**
+     * 龙王
+     */
     TALK_ACTIVE("talkactive","龙王"),
+
+    /**
+     * 群聊之火
+     */
     PERFORMER("performer","群聊之火"),
+
+    /**
+     * 快乐源泉
+     */
     EMOTION("emotion","快乐源泉");
 
     /**
@@ -21,8 +32,9 @@ public enum HonorType {
 
     /**
      * 构建postType枚举类
-     * param action
-     * param description
+     *
+     * @param action postType类型
+     * @param description 描述信息
      */
     HonorType(String action, String description) {
         this.action = action;
@@ -31,7 +43,8 @@ public enum HonorType {
 
     /**
      * 获取发送参数 action
-     * return
+     *
+     * @return 返回postType类型
      */
     public String getAction() {
         return action;
@@ -39,7 +52,8 @@ public enum HonorType {
 
     /**
      * 获取描述 description
-     * return
+     *
+     * @return 返回描述信息
      */
     public String getDescription() {
         return description;

@@ -6,12 +6,12 @@
 
     <groupId>io.gitee.soulgoodmans</groupId>
     <artifactId>LagrangeMCPlugin</artifactId>
-    <version>0.0.8</version>
+    <version>0.0.9</version>
     <packaging>jar</packaging>
 
     <name>LagrangeMCPlugin</name>
 
-    <url>https://gitee.com/busilaoni/LagrangeMC</url>
+    <url>https://gitee.com/soulgoodmans/LagrangeMC</url>
 
     <licenses>
         <license>
@@ -21,9 +21,9 @@
     </licenses>
 
     <scm>
-        <connection>https://gitee.com/busilaoni/LagrangeMC.git</connection>
-        <developerConnection>scm:git:ssh://git@gitee.com:busilaoni/LagrangeMC.git</developerConnection>
-        <url>https://gitee.com/busilaoni/LagrangeMC</url>
+        <connection>https://gitee.com/soulgoodmans/LagrangeMC.git</connection>
+        <developerConnection>scm:git:ssh://git@gitee.com:soulgoodmans/LagrangeMC.git</developerConnection>
+        <url>https://gitee.com/soulgoodmans/LagrangeMC</url>
     </scm>
 
     <developers>

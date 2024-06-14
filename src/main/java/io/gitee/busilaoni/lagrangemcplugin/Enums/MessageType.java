@@ -5,7 +5,14 @@ package io.gitee.busilaoni.lagrangemcplugin.Enums;
  */
 public enum MessageType {
 
+    /**
+     * 私聊消息
+     */
     PRIVATE("private","私聊消息"),
+
+    /**
+     * 群消息
+     */
     GROUP("group","群消息");
 
     /**
@@ -20,8 +27,9 @@ public enum MessageType {
 
     /**
      * 构建postType枚举类
-     * param action
-     * param description
+     *
+     * @param action postType类型
+     * @param description 描述信息
      */
     MessageType(String action, String description) {
         this.action = action;
@@ -30,7 +38,8 @@ public enum MessageType {
 
     /**
      * 获取发送参数 action
-     * return
+     *
+     * @return 返回postType类型
      */
     public String getAction() {
         return action;
@@ -38,7 +47,8 @@ public enum MessageType {
 
     /**
      * 获取描述 description
-     * return
+     *
+     * @return 返回描述信息
      */
     public String getDescription() {
         return description;

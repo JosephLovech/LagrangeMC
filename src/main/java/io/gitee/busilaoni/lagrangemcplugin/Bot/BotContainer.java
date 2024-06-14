@@ -15,8 +15,9 @@ public class BotContainer {
 
     /**
      * 根据BotId获取机器人
-     * param botId
-     * return
+     *
+     * @param botId 机器人QQ号
+     * @return 返回机器人对象
      */
     public static Bot getBot(long botId) {
 
@@ -28,7 +29,11 @@ public class BotContainer {
     }
 
     /**
-     *  创建机器人实例
+     * 创建机器人实例
+     *
+     * @param botId 机器人QQ号
+     * @param socket 机器人连接的websocket对象
+     * @return 返回机器人对象
      */
     public static Bot createBot(Long botId, WebSocket socket){
 

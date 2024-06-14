@@ -25,6 +25,11 @@ public class ApiSender extends Thread{
      */
     private final Object lock = new Object();
 
+    /**
+     * 构建apiSender
+     *
+     * @param socket webSocket对象
+     */
     public ApiSender(WebSocket socket) {
         this.socket = socket;
     }
@@ -32,8 +37,8 @@ public class ApiSender extends Thread{
     /**
      * 发送 API 请求，并等待响应
      *
-     * param apiJson API 请求的 JSON 对象
-     * return API 响应的 JSON 对象
+     * @param result API 请求的 JSON 对象
+     * @return API 响应的 JSON 对象
      */
     public  JSONObject onSendMessage(ApiResult result) throws InterruptedException {
         // 加锁同步代码块

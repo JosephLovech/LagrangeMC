@@ -5,7 +5,14 @@ package io.gitee.busilaoni.lagrangemcplugin.Enums;
  */
 public enum RequestType {
 
+    /**
+     * 加好友请求
+     */
     FRIEND("friend","加好友请求"),
+
+    /**
+     * 加群请求/邀请
+     */
     GROUP("group","加群请求/邀请");
 
     /**
@@ -20,8 +27,9 @@ public enum RequestType {
 
     /**
      * 构建postType枚举类
-     * param action
-     * param description
+     *
+     * @param action postType类型
+     * @param description 描述信息
      */
     RequestType(String action, String description) {
         this.action = action;
@@ -30,7 +38,8 @@ public enum RequestType {
 
     /**
      * 获取发送参数 action
-     * return
+     *
+     * @return 返回postType类型
      */
     public String getAction() {
         return action;
@@ -38,7 +47,8 @@ public enum RequestType {
 
     /**
      * 获取描述 description
-     * return
+     *
+     * @return 返回描述信息
      */
     public String getDescription() {
         return description;

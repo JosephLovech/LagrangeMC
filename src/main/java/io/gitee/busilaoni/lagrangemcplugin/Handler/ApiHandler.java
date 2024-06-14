@@ -27,9 +27,10 @@ public class ApiHandler {
 
     /**
      * 发送Api消息
-     * param api Api枚举类
-     * param map 内容
-     * return
+     *
+     * @param api Api枚举类
+     * @param map 内容
+     * @return 返回JSONObject对象
      */
     public JSONObject sendApiJson(Api api, Map map, WebSocket socket){
 
@@ -54,7 +55,7 @@ public class ApiHandler {
 
     /**
      * 收到 以前调用的API 的响应
-     * param message 内容
+     * @param jsonObject 内容
      */
     public static void onReceiveApiMessage(JSONObject jsonObject) {
 
@@ -74,9 +75,9 @@ public class ApiHandler {
 
     /**
      * 封装信息
-     * param action
-     * param params
-     * return
+     * @param action 发送信息的接口链接
+     * @param params 参数
+     * @return 返回ApiResult对象
      */
     private  ApiResult getApiResult(String action, Map params){
         ApiResult result = new ApiResult();

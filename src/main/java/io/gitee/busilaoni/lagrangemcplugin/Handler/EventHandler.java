@@ -20,7 +20,8 @@ public class EventHandler {
 
     /**
      * 处理事件
-     * param jsonObject 事件JSON对象
+     *
+     * @param jsonObject 事件JSON对象
      */
     public void handler(Bot bot, JSONObject jsonObject){
         //获取postType类型
@@ -62,8 +63,9 @@ public class EventHandler {
     }
 
     /**
-     * 处理接受到的消息
-     * param jsonObject
+     * 处理接收到的消息
+     *
+     * @param jsonObject 接收到的消息
      */
     private void handleMessage(Bot bot, JSONObject jsonObject){
 
@@ -104,7 +106,8 @@ public class EventHandler {
 
     /**
      * 处理接受到的元事件
-     * param jsonObject
+     *
+     * @param jsonObject 接收到的消息
      */
     private void handleMeta(Bot bot, JSONObject jsonObject){
 
@@ -146,7 +149,8 @@ public class EventHandler {
 
     /**
      * 处理接受到的通知
-     * param jsonObject
+     *
+     * @param jsonObject 接收到的消息
      */
     private void handleNotice(Bot bot, JSONObject jsonObject){
 
@@ -303,7 +307,8 @@ public class EventHandler {
 
     /**
      * 处理接受到的请求
-     * param jsonObject
+     *
+     * @param jsonObject 接收到的消息
      */
     private void handleRequest(Bot bot, JSONObject jsonObject){
 
@@ -344,7 +349,8 @@ public class EventHandler {
     /**
      * 处理插件消息。
      * 处理方法，接受一个 BotPlugin 参数，并返回一个整数结果
-     * param action
+     *
+     * @param action 方法
      */
     private void handlePluginMessages(Function<BotPlugin, Integer> action) {
 
@@ -363,9 +369,10 @@ public class EventHandler {
 
     /**
      * 获取指定类型的插件实例。
-     * param clazz 插件类型
-     * param <T> 插件类型参数
-     * return 插件实例，如果不存在，则返回 null
+     *
+     * @param clazz 插件类型
+     * @param <T> 插件类型参数
+     * @return 插件实例，如果不存在，则返回 null
      */
     private <T> T getPlugin(Class<T> clazz) {
         try {

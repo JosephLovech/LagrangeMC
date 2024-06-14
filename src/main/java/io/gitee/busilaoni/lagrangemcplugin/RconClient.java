@@ -34,9 +34,10 @@ public class RconClient {
 
     /**
      * 构造器中配置信息，port为null时默认使用25575端口
-     * param port
-     * param host
-     * param password
+     *
+     * @param port rcon端口号
+     * @param host 服务器地址
+     * @param password 密码
      */
     public RconClient(Integer port, String host, String password){
 
@@ -69,8 +70,9 @@ public class RconClient {
 
     /**
      * 发送指令
-     * param command
-     * return
+     *
+     * @param command 命令
+     * @return 返回信息
      */
     public String sendCommand(String command){
 

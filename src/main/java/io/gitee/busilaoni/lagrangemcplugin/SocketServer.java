@@ -28,7 +28,8 @@ public class SocketServer extends WebSocketServer {
 
     /**
      * 端口号
-     * param port
+     *
+     * @param port 开启的端口号
      */
     public SocketServer(Integer port) {
         super(new InetSocketAddress(port));
@@ -40,8 +41,9 @@ public class SocketServer extends WebSocketServer {
 
     /**
      * 开启连接
-     * param conn
-     * param handshake
+     *
+     * @param conn websocket对象
+     * @param handshake 连接信息
      */
     @Override
     public void onOpen(WebSocket conn, ClientHandshake handshake) {
@@ -55,10 +57,11 @@ public class SocketServer extends WebSocketServer {
 
     /**
      *  关闭连接
-     * param conn
-     * param code
-     * param reason
-     * param remote
+     *
+     * @param conn websocket对象
+     * @param code 状态码
+     * @param reason 断开原因
+     * @param remote 关闭
      */
     @Override
     public void onClose(WebSocket conn, int code, String reason, boolean remote) {
@@ -68,8 +71,9 @@ public class SocketServer extends WebSocketServer {
 
     /**
      * 接受客户端消息
-     * param conn
-     * param message
+     *
+     * @param conn websocket对象
+     * @param message 发送的信息
      */
     @Override
     public void onMessage(WebSocket conn, String message) {
@@ -90,8 +94,9 @@ public class SocketServer extends WebSocketServer {
 
     /**
      * 错误信息
-     * param conn
-     * param ex
+     *
+     * @param conn websocket对象
+     * @param ex 错误类型
      */
     @Override
     public void onError(WebSocket conn, Exception ex) {
