@@ -8,7 +8,7 @@ Lagrange.Core核心 https://github.com/LagrangeDev/Lagrange.Core
 
 OneBot11协议 https://github.com/botuniverse/onebot-11/tree/master
 
-go-cqhttp的javaWebsocket框架 https://gitee.com/changwenpeng/svipbot
+onebot11的javaWebsocket框架 https://gitee.com/changwenpeng/svipbot
 
 
 
@@ -32,7 +32,7 @@ maven
 <dependency>
    <groupId>io.gitee.soulgoodmans</groupId>
    <artifactId>LagrangeMCPlugin</artifactId>
-   <version>0.0.8</version>
+   <version>0.0.9</version>
 </dependency>
 ~~~
 
@@ -42,7 +42,7 @@ gradle
 
 ~~~gradle
 dependencies {
-    implementation 'io.gitee.soulgoodmans:LagrangeMCPlugin:0.0.8'
+    implementation 'io.gitee.soulgoodmans:LagrangeMCPlugin:0.0.9'
 }
 ~~~
 
